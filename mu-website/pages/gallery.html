@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thư Viện – BIT FC</title>
+  <link rel="icon" href="../assessts/logoBit.png" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/pages.css" />
+</head>
+<body>
+
+  <div id="preloader">
+    <img class="pre-logo" src="../assessts/logoBit.png" alt="NONE BIT FC" />
+    <div class="pre-text">NONE BIT FC</div>
+    <div class="pre-sub">Thư Viện</div>
+    <div class="pre-bar-wrap"><div class="pre-bar"></div></div>
+  </div>
+
+  <nav id="navbar">
+    <a href="../index.html" class="nav-logo">
+      <img src="../assessts/logoBit.png" alt="NONE BIT FC Logo" />
+      <span>NONE BIT FC</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Trang chủ</a></li>
+      <li><a href="team.html">Đội Hình</a></li>
+      <li><a href="gallery.html" class="active">Thư Viện</a></li>
+      <li><a href="history.html">Thành Tích</a></li>
+      <li><a href="news.html">Tin Tức</a></li>
+      <li><a href="Management/dashboard.html">Quản Lý</a></li>
+      <li><a href="../index.html#contact">Liên Hệ</a></li>
+    </ul>
+    <div class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  </nav>
+  <div class="mobile-nav">
+    <a href="../index.html">Trang chủ</a>
+    <a href="team.html">Đội Hình</a>
+    <a href="gallery.html">Thư Viện</a>
+    <a href="history.html">Thành Tích</a>
+    <a href="news.html">Tin Tức</a>
+        <a href="Management/dashboard.html">Quản Lý</a>
+    <a href="../index.html#contact">Liên Hệ</a>
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div id="lightbox" class="lightbox">
+    <button id="lightbox-close" class="lightbox-close">✕</button>
+    <button class="lightbox-nav btn-prev" id="lightbox-prev">❮</button>
+    <img id="lightbox-img" src="" alt="Gallery" style="display: none;" />
+    <div id="lightbox-video-container" style="display: none; width: 80%; max-width: 900px; aspect-ratio: 16/9; background: #000;">
+      <iframe id="lightbox-iframe" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width: 100%; height: 100%;"></iframe>
+    </div>
+    <button class="lightbox-nav btn-next" id="lightbox-next">❯</button>
+  </div>
+
+  <main>
+    <div class="page-hero">
+      <div class="eyebrow">BIT FC Gallery</div>
+      <h1>Khoảnh Khắc Bất Diệt</h1>
+      <p>Những hình ảnh và video ghi lại hành trình vinh quang của The Pride of Banking IT</p>
+    </div>
+
+    <div class="container">
+      <div class="gallery-filters fade-in">
+        <button class="filter-btn gallery-filter-btn active" data-filter="all">Tất Cả</button>
+        <button class="filter-btn gallery-filter-btn" data-filter="photo">Hình Ảnh</button>
+        <button class="filter-btn gallery-filter-btn" data-filter="video">Video Clips</button>
+      </div>
+
+      <div class="gallery-masonry" id="gallery-masonry-container">
+        <!-- Render from JS -->
+        <div style="grid-column: 1/-1; text-align: center; padding: 50px 0; color: var(--gray-mid);">
+          <div class="spinner"></div> Đang tải dữ liệu...
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <img src="../assessts/logoBit.png" alt="NONE BIT FC" />
+        <div class="footer-logo-text">NONE BIT FC<span>The Pride of Banking IT</span></div>
+      </div>
+      <nav class="footer-links">
+        <a href="../index.html">Trang chủ</a>
+        <a href="team.html">Đội Hình</a>
+        <a href="gallery.html">Thư Viện</a>
+        <a href="history.html">Thành Tích</a>
+        <a href="news.html">Tin Tức</a>
+        <a href="Management/dashboard.html">Quản Lý</a>
+        <a href="../index.html#contact">Liên Hệ</a>
+      </nav>
+      <div class="footer-socials">
+        <a href="#">f</a><a href="#">in</a><a href="#">▶</a><a href="#">𝕏</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 BIT FC. All rights reserved.</p>
+      <p>Developed by <a href="#">Nguyễn Xuân Khoa</a></p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/pages.js"></script>
+  <script type="module" src="../js/gallery-public.js"></script>
+</body>
+</html>

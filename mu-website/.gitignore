@@ -1,0 +1,67 @@
+# ── Environment variables (KHÔNG BAO GIỜ commit file này) ──
+.env
+.env.local
+.env.*.local
+.env.development
+.env.production
+
+# ── Dependencies ──
+node_modules/
+.pnp
+.pnp.js
+
+# ── Build output ──
+dist/
+dist-ssr/
+build/
+out/
+
+# ── Vite cache ──
+.vite/
+vite.config.ts.timestamp-*
+
+# ── Firebase ──
+.firebase/
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
+database-debug.log
+.firebaserc
+
+# ── OS files ──
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+desktop.ini
+
+# ── Editor / IDE ──
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ── Logs ──
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ── Runtime ──
+*.pid
+*.seed
+*.pid.lock
+
+# ── Testing ──
+coverage/
+.nyc_output/
+
+# ── Misc ──
+*.local

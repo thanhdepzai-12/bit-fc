@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BIT FC — Quản lý Trận Đấu</title>
+  <link rel="icon" href="../../assessts/logoBit.png" />
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../css/Management/match-panel.css" />
+  <script type="module" src="../../js/Management/auth-guard.js"></script>
+</head>
+<body>
+<div class="dashboard">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <a href="/mu-website/index.html" class="sidebar-logo" style="text-decoration: none; color: inherit;">
+      <div class="logo-crest">
+        <img src="../../assessts/logoBit.png" alt="NONE BIT FC" />
+      </div>
+      <div class="logo-text">
+        <div class="logo-name">BIT FC</div>
+        <div class="logo-sub">The Pride of Banking IT</div>
+      </div>
+    </a>
+    <div class="nav-section-label">Chính</div>
+    <a href="dashboard.html" class="nav-item"><i class="ti ti-layout-dashboard"></i>Tổng quan</a>
+    <a href="players-panel.html" class="nav-item"><i class="ti ti-users"></i>Cầu thủ</a>
+    <a href="staff-panel.html" class="nav-item"><i class="ti ti-user-circle"></i>Ban huấn luyện</a>
+    <a href="match-panel.html" class="nav-item active"><i class="ti ti-calendar"></i>Lịch thi đấu</a>
+    
+    <div class="nav-section-label">Truyền thông</div>
+    <a href="gallery-panel.html" class="nav-item"><i class="ti ti-player-play"></i>Highlights</a>
+    <a href="new-panel.html" class="nav-item"><i class="ti ti-news"></i>Tin tức &amp; Báo</a>
+    <a href="photo-panel.html" class="nav-item"><i class="ti ti-photo"></i>Thư viện ảnh</a>
+    
+    <div class="nav-section-label">Khác</div>
+    <a href="#" class="nav-item"><i class="ti ti-trophy"></i>Thành tích</a>
+    <a href="#" class="nav-item"><i class="ti ti-settings"></i>Cài đặt</a>
+    <div class="sidebar-bottom">
+      <div class="season-badge">Mùa 2024 – 25</div>
+    </div>
+  </aside>
+
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <!-- MAIN -->
+  <div class="main">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+        <div>
+          <div class="greet">Xin chào, Admin</div>
+          <div class="page-title">Quản lý <span>Trận Đấu</span></div>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <div class="date-chip"><i class="ti ti-calendar"></i><span id="current-date"></span></div>
+        <button class="icon-btn" aria-label="Thông báo"><i class="ti ti-bell"></i><span class="dot"></span></button>
+        <button class="avatar-btn" aria-label="Tài khoản">AD</button>
+      </div>
+    </header>
+
+    <main class="content">
+
+      <!-- TOOLBAR -->
+      <div class="news-toolbar">
+        <div class="search-wrap">
+          <i class="ti ti-search"></i>
+          <input type="text" class="search-input" id="search-input" placeholder="Tìm đội khách..." />
+        </div>
+        <select class="filter-select" id="filter-comp">
+          <option value="">Tất cả giải đấu</option>
+          <option value="Giao Hữu">Giao Hữu</option>
+          <option value="Giải Nội Bộ">Giải Nội Bộ</option>
+          <option value="Giải Mở Rộng">Giải Mở Rộng</option>
+        </select>
+        <select class="filter-select" id="filter-type">
+          <option value="">Tất cả</option>
+          <option value="remark">Remark (Nổi bật)</option>
+          <option value="public">Public (Hiển thị card)</option>
+        </select>
+        <div class="toolbar-spacer"></div>
+        <button class="btn-add" id="btn-add-match">
+          <i class="ti ti-plus"></i><span>Thêm trận đấu</span>
+        </button>
+      </div>
+
+      <!-- COUNT -->
+      <div class="count-bar">
+        <span>Hiển thị</span>
+        <span class="count-num" id="count-shown">0</span>
+        <span class="count-sep">/</span>
+        <span class="count-num" id="count-total">0</span>
+        <span>trận đấu</span>
+        <span class="count-sep">|</span>
+        <span class="pub-count"><i class="ti ti-star"></i> <span id="count-remark">0</span>/1 Remark</span>
+        <span class="count-sep">·</span>
+        <span class="pub-count" style="color:var(--white)"><i class="ti ti-eye"></i> <span id="count-public">0</span>/2 Public</span>
+      </div>
+
+      <!-- GRID CARDS -->
+      <div class="table-panel">
+        <div class="match-grid-wrap">
+          <div class="match-grid" id="match-grid">
+            <!-- Render match cards here -->
+          </div>
+        </div>
+        <div class="pagination-bar" id="pagination-bar">
+          <span class="pagination-info"></span>
+          <div class="pagination-controls"></div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- ══ FORM MODAL (Thêm / Sửa) ══ -->
+<div class="modal-overlay" id="form-modal">
+  <div class="modal-card match-modal-card news-modal-card">
+    <div class="modal-header">
+      <div class="modal-title" id="form-modal-title">Thêm <span>Trận Đấu</span></div>
+      <button class="modal-close" id="form-modal-close"><i class="ti ti-x"></i></button>
+    </div>
+
+    <div class="match-modal-layout news-modal-layout">
+
+      <!-- LEFT: Đội bóng và Thuộc tính -->
+      <div class="match-modal-left news-modal-left">
+        
+        <div class="form-section-title">Đội Nhà (Home)</div>
+        <div class="logo-upload-box">
+          <div class="logo-upload-title">Logo Đội Nhà</div>
+          <div class="logo-preview-wrap" id="home-logo-wrap">
+            <img id="home-logo-img" src="../../assessts/logoBit.png" class="logo-preview-img" style="display:block" />
+            <div class="logo-placeholder" id="home-logo-ph" style="display:none"><i class="ti ti-photo-plus"></i></div>
+            <input type="file" id="home-logo-input" accept="image/*" style="display:none" />
+          </div>
+          <button type="button" class="logo-remove-btn" id="home-logo-remove" style="display:none">Xóa logo</button>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Tên đội nhà *</label>
+          <input type="text" class="form-input" id="f-home" value="BIT FC" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Tên viết tắt (Tối đa 4 ký tự) *</label>
+          <input type="text" class="form-input" id="f-home-short" value="BIT" maxlength="4" />
+        </div>
+
+        <div class="form-section-title" style="margin-top:14px">Đội Khách (Away)</div>
+        <div class="logo-upload-box">
+          <div class="logo-upload-title">Logo Đội Khách</div>
+          <div class="logo-preview-wrap" id="away-logo-wrap">
+            <img id="away-logo-img" src="" class="logo-preview-img" style="display:none" />
+            <div class="logo-placeholder" id="away-logo-ph"><i class="ti ti-photo-plus"></i></div>
+            <input type="file" id="away-logo-input" accept="image/*" style="display:none" />
+          </div>
+          <button type="button" class="logo-remove-btn" id="away-logo-remove" style="display:none">Xóa logo</button>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Tên đội khách *</label>
+          <input type="text" class="form-input" id="f-away" placeholder="Khoa Học FC" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Tên viết tắt (Tối đa 4 ký tự) *</label>
+          <input type="text" class="form-input" id="f-away-short" placeholder="KHOA" maxlength="4" />
+        </div>
+
+      </div>
+
+      <!-- RIGHT: Thông tin và Cầu thủ ghi bàn -->
+      <div class="match-modal-right news-modal-right">
+        
+        <div class="form-row-2">
+          <div class="form-group">
+            <label class="form-label">Tính chất / Giải đấu *</label>
+            <select class="form-select" id="f-comp">
+              <option value="Giao Hữu">Giao Hữu</option>
+              <option value="Giải Nội Bộ">Giải Nội Bộ</option>
+              <option value="Giải Mở Rộng">Giải Mở Rộng</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Sân thi đấu *</label>
+            <input type="text" class="form-input" id="f-venue" placeholder="Sân ABC" />
+          </div>
+        </div>
+
+        <div class="form-row-2">
+          <div class="form-group">
+            <label class="form-label">Ngày thi đấu *</label>
+            <input type="date" class="form-input" id="f-date" max="9999-12-31" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Giờ thi đấu *</label>
+            <input type="time" class="form-input" id="f-time" />
+          </div>
+        </div>
+
+        <div class="form-row-2">
+          <div class="form-group">
+            <label class="form-label">Tỉ số</label>
+            <input type="text" class="form-input" id="f-score" placeholder="3 - 1" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Kết quả (của Đội nhà)</label>
+            <select class="form-select" id="f-result">
+              <option value="none">Chưa có / Đang chờ</option>
+              <option value="w">Thắng (W)</option>
+              <option value="d">Hòa (D)</option>
+              <option value="l">Thua (L)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-section-title" style="margin-top:20px">Trạng thái hiển thị</div>
+        <div class="form-group">
+          <label style="display:flex;align-items:center;gap:10px;color:var(--white);font-family:var(--font-condensed);font-size:14px;cursor:pointer;">
+            <input type="checkbox" id="f-remark" style="width:16px;height:16px;" />
+            <span>Nổi bật nhất (Remark - Đếm ngược trang chủ - Max 1)</span>
+          </label>
+        </div>
+        <div class="form-group" style="margin-bottom:20px">
+          <label style="display:flex;align-items:center;gap:10px;color:var(--white);font-family:var(--font-condensed);font-size:14px;cursor:pointer;">
+            <input type="checkbox" id="f-public" style="width:16px;height:16px;" />
+            <span>Công khai (Public - Slider trang chủ - Max 2)</span>
+          </label>
+        </div>
+
+        <div class="form-section-title">Cầu thủ ghi bàn (Đội nhà)</div>
+        <div class="form-hint">Chọn cầu thủ đã ghi bàn. Hệ thống sẽ tự cập nhật bàn thắng vào hồ sơ của cầu thủ.</div>
+        <div class="scorer-list" id="scorer-list">
+          <!-- Render scorer inputs here -->
+        </div>
+        <button type="button" class="btn-add-scorer" id="btn-add-scorer">
+          <i class="ti ti-plus"></i> Thêm cầu thủ
+        </button>
+
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn-cancel" id="form-cancel-btn">Hủy</button>
+      <button class="btn-save" id="form-save-btn">
+        <i class="ti ti-device-floppy"></i> Lưu trận đấu
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ DELETE MODAL ══ -->
+<div class="modal-overlay" id="delete-modal">
+  <div class="delete-card">
+    <div class="delete-body">
+      <div class="delete-icon-wrap"><i class="ti ti-trash"></i></div>
+      <div class="delete-title">Xác nhận xóa</div>
+      <div class="delete-msg">
+        Bạn có chắc muốn xóa trận đấu<br>
+        <span class="delete-name" id="delete-match-title">—</span>?<br>
+        Bàn thắng của cầu thủ (nếu có) sẽ bị trừ đi.
+      </div>
+    </div>
+    <div class="delete-footer">
+      <button class="btn-cancel" id="delete-cancel-btn">Hủy</button>
+      <button class="btn-del-confirm" id="delete-confirm-btn">Xóa ngay</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast-wrap" id="toast-wrap"></div>
+
+<script type="module" src="../../js/Management/match-panel.js"></script>
+</body>
+</html>

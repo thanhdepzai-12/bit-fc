@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BIT FC — Dashboard</title>
+<link rel="icon" href="../../assessts/logoBit.png" />
+
+  <!-- Tabler Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<script type="module" src="../../js/Management/auth-guard.js"></script>
+
+  <!-- Dashboard CSS -->
+  <link rel="stylesheet" href="../../css/dashboard.css" />
+</head>
+<body>
+
+<h2 class="sr-only">BIT FC – Trang tổng quan quản lý đội bóng</h2>
+
+<div class="dashboard">
+
+  <!-- ============================================================
+       SIDEBAR
+       ============================================================ -->
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+  <aside class="sidebar">
+    <a href="/mu-website/index.html" class="sidebar-logo" style="text-decoration: none; color: inherit;">
+      <div class="logo-crest">
+        <img src="../../assessts/logoBit.png" alt="NONE BIT FC Logo" />
+      </div>
+      <div class="logo-text">
+        <div class="logo-name">BIT FC</div>
+        <div class="logo-sub">The Pride of Banking IT</div>
+      </div>
+    </a>
+    <div class="nav-section-label">Chính</div>
+    <div class="nav-item active" data-page="dashboard" onclick="window.location.href='dashboard.html'">
+      <i class="ti ti-layout-dashboard" aria-hidden="true"></i>Tổng quan
+    </div>
+    <div class="nav-item" data-page="players" onclick="window.location.href='players-panel.html'">
+      <i class="ti ti-users" aria-hidden="true"></i>Cầu thủ
+    </div>
+    <div class="nav-item" data-page="staff" onclick="window.location.href='staff-panel.html'">
+      <i class="ti ti-user-circle" aria-hidden="true"></i>Ban huấn luyện
+    </div>
+    <div class="nav-item" data-page="matches" onclick="window.location.href='match-panel.html'">
+      <i class="ti ti-calendar" aria-hidden="true"></i>Lịch thi đấu
+    </div>
+
+    <div class="nav-section-label">Truyền thông</div>
+    <div class="nav-item" data-page="highlights" onclick="window.location.href='gallery-panel.html'">
+      <i class="ti ti-player-play" aria-hidden="true"></i>Highlights
+    </div>
+    <div class="nav-item" data-page="news" onclick="window.location.href='new-panel.html'">
+      <i class="ti ti-news" aria-hidden="true"></i>Tin tức &amp; Báo
+    </div>
+    <div class="nav-item" data-page="gallery">
+      <i class="ti ti-photo" aria-hidden="true"></i>Thư viện ảnh
+    </div>
+
+    <div class="nav-section-label">Khác</div>
+    <div class="nav-item" data-page="trophies">
+      <i class="ti ti-trophy" aria-hidden="true"></i>Thành tích
+    </div>
+    <div class="nav-item" data-page="settings">
+      <i class="ti ti-settings" aria-hidden="true"></i>Cài đặt
+    </div>
+
+    <div class="sidebar-bottom">
+      <div class="season-badge">Mùa 2024 – 25</div>
+    </div>
+  </aside>
+
+  <!-- ============================================================
+       MAIN
+       ============================================================ -->
+  <div class="main">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="greet" id="topbar-greet">Xin chào, Admin</div>
+        <div class="page-title" id="topbar-title">Tổng quan <span>NONE BIT FC</span></div>
+      </div>
+      <div class="topbar-right">
+        <div class="date-chip">
+          <i class="ti ti-calendar" aria-hidden="true"></i>
+          <span id="current-date">Thứ Tư, 3 Tháng 6, 2026</span>
+        </div>
+        <button class="icon-btn" aria-label="Thông báo">
+          <i class="ti ti-bell" aria-hidden="true"></i>
+          <span class="dot"></span>
+        </button>
+        <button class="avatar-btn" aria-label="Tài khoản">AD</button>
+      </div>
+    </header>
+
+    <!-- CONTENT -->
+    <main class="content">
+
+      <!-- NEXT MATCH BANNER -->
+      <div class="next-match-banner" id="next-match-content">
+        <!-- rendered by JS -->
+      </div>
+
+      <!-- STAT CARDS -->
+      <div class="stats-grid" id="stats-grid">
+        <!-- rendered by JS -->
+      </div>
+
+      <!-- MID ROW: chart | results | standings -->
+      <div class="mid-row">
+
+        <!-- CHART PANEL -->
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title">Bàn thắng theo tháng</div>
+            <div class="panel-sub">Năm 2025</div>
+          </div>
+          <div class="chart-legend">
+            <div class="legend-item">
+              <div class="legend-dot" style="background:var(--red-primary)"></div>
+              Ghi bàn
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot" style="background:rgba(251,225,34,0.6)"></div>
+              Thủng lưới
+            </div>
+          </div>
+          <div class="chart-container">
+            <div class="bar-chart" id="bar-chart">
+              <!-- rendered by JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- RESULTS PANEL -->
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title">Kết quả gần đây</div>
+            <span class="panel-link">Tất cả →</span>
+          </div>
+          <div class="form-dots" id="form-dots">
+            <!-- rendered by JS -->
+          </div>
+          <div class="stat-bars" id="stat-bars">
+            <!-- rendered by JS -->
+          </div>
+          <div class="match-list" id="match-list">
+            <!-- rendered by JS -->
+          </div>
+        </div>
+
+        <!-- STANDINGS PANEL -->
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title">Bảng xếp hạng</div>
+            <div class="panel-sub">V.League Nội bộ</div>
+          </div>
+          <div class="standings-wrap">
+            <table class="standings-table">
+              <thead>
+                <tr>
+                  <th style="width:110px">#&nbsp;&nbsp;Đội</th>
+                  <th style="width:26px">T</th>
+                  <th style="width:26px">H</th>
+                  <th style="width:26px">B</th>
+                  <th style="width:32px">Đ</th>
+                </tr>
+              </thead>
+              <tbody id="standings-body">
+                <!-- rendered by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div><!-- /mid-row -->
+
+      <!-- BOTTOM ROW: scorers | assists | media -->
+      <div class="bot-row">
+
+        <!-- TOP SCORERS -->
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title">Vua phá lưới</div>
+            <div class="panel-sub">Mùa này</div>
+          </div>
+          <div class="player-list" id="top-scorers">
+            <!-- rendered by JS -->
+          </div>
+        </div>
+
+        <!-- TOP ASSISTS -->
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title">Kiến tạo nhiều nhất</div>
+            <div class="panel-sub">Mùa này</div>
+          </div>
+          <div class="player-list" id="top-assists">
+            <!-- rendered by JS -->
+          </div>
+        </div>
+
+        <!-- MEDIA -->
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title">Truyền thông mới</div>
+            <span class="panel-link">Xem tất cả →</span>
+          </div>
+          <div class="media-list" id="media-list">
+            <!-- rendered by JS -->
+          </div>
+        </div>
+
+      </div><!-- /bot-row -->
+
+    </main>
+  </div><!-- /main -->
+
+</div><!-- /dashboard -->
+
+<!-- DATA & SCRIPTS -->
+<script src="../../FakeData/data.js"></script>
+<script src="../../js/Management/dashboard.js"></script>
+</body>
+</html>

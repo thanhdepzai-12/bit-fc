@@ -1,0 +1,972 @@
+/* ============================================================
+   PAGES CSS - MANCHESTER UNITED FC (Dựa trên khung Chelsea + Giữ nguyên chi tiết MU)
+   ============================================================ */
+
+/* ---- TEAM PAGE ---- */
+.team-filters {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+
+.filter-btn {
+  font-family: var(--font-condensed);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 0.6rem 1.4rem;
+  border-radius: 2px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: transparent;
+  color: var(--gray-mid);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+  background: var(--red-primary);
+  border-color: var(--red-primary);
+  color: var(--white);
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  padding-bottom: 80px;
+}
+
+.team-card {
+  background: linear-gradient(160deg, rgba(218, 41, 28, 0.1), rgba(74, 0, 0, 0.25));
+  border: 2px solid rgba(169, 31, 21, 0.46);
+  border-radius: 6px;
+  overflow: hidden;
+  transition: all var(--transition);
+  cursor: pointer;
+  position: relative;
+}
+
+.team-card:hover {
+  border-color: rgba(218, 41, 28, 0.35);
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.4), var(--shadow-glow);
+}
+
+.team-card-img {
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  position: relative;
+}
+
+.team-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  transition: transform var(--transition-slow);
+}
+
+.team-card:hover .team-card-img img { transform: scale(1.06); }
+
+.team-card-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 55%, rgba(74, 0, 0, 0.85) 100%);
+}
+
+.team-card-body {
+  padding: 1.2rem;
+}
+
+.team-card-number {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+
+  line-height: 1;
+  margin-bottom: 0.3rem;
+}
+
+.team-card-name {
+  font-family: var(--font-condensed);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.team-card-pos {
+  font-family: var(--font-condensed);
+  font-size: 0.68rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--red-primary);
+  margin-top: 0.2rem;
+}
+
+.team-card-badge {
+  position: absolute;
+  top: 0.7rem; right: 0.7rem;
+  background: rgba(13, 0, 0, 0.75);
+  border: 1px solid var(--red-primary);
+  border-radius: 2px;
+  padding: 0.2rem 0.5rem;
+  font-family: var(--font-condensed);
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--red-primary);
+  z-index: 2;
+}
+
+/* Staff card variant */
+.staff-card {
+  background: linear-gradient(135deg, rgba(218, 41, 28, 0.06), rgba(139, 0, 0, 0.12));
+}
+
+.staff-card .team-card-body { padding: 1.5rem; }
+
+.staff-card .team-card-number {
+  font-size: 1.2rem;
+  opacity: 1;
+  font-family: var(--font-condensed);
+  letter-spacing: 0.2em;
+  color: var(--red-primary);
+}
+
+/* ---- GALLERY PAGE ---- */
+.gallery-filters {
+  display: flex;
+  gap: 0.6rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+}
+
+.gallery-masonry {
+  columns: 3;
+  column-gap: 1rem;
+  padding-bottom: 80px;
+}
+
+.gallery-item {
+  break-inside: avoid;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  border-radius: 16px; /* Nhẹ nhàng hơn */
+  border: 2px solid rgba(218, 41, 28, 0.401); /* Viền nhẹ giống player-profile */
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+   box-shadow:
+    0 24px 80px rgba(0, 0, 0, 0.7),
+    var(--shadow-glow);
+}
+
+.gallery-item:hover {
+  transform: translateY(-5px) scale(1.02); /* Scale nhẹ nhàng hơn */
+  border-color: rgba(218, 41, 28, 0.6);
+  box-shadow: 0 15px 40px rgba(218, 41, 28, 0.35); /* Glow nhẹ nhàng hơn */
+}
+
+/* Hiệu ứng Shimmer xẹt sáng */
+.gallery-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  background: linear-gradient(115deg, transparent 20%, rgba(255, 255, 255, 0.15) 40%, rgba(255, 220, 200, 0.25) 50%, rgba(255, 255, 255, 0.15) 60%, transparent 80%);
+  background-size: 200% 100%;
+  transform: translateX(-100%) skewX(-15deg);
+  pointer-events: none;
+}
+.gallery-item:hover::before {
+  animation: shimmerSlideGallery 0.7s ease forwards;
+}
+@keyframes shimmerSlideGallery {
+  0%   { transform: translateX(-120%) skewX(-15deg); opacity: 1; }
+  100% { transform: translateX(120%)  skewX(-15deg); opacity: 0.6; }
+}
+
+.gallery-item img,
+.gallery-item .vid-thumb {
+  width: 100%;
+  display: block;
+  transition: transform var(--transition-slow), filter var(--transition);
+  filter: brightness(0.85);
+}
+
+.gallery-item:hover img,
+.gallery-item:hover .vid-thumb {
+  /* Vì bên ngoài đã scale 1.05, bên trong chỉ cần scale nhẹ hoặc giữ nguyên để mượt hơn */
+  transform: scale(1.02);
+  filter: brightness(1);
+}
+
+.gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgb(0, 0, 0) 10%, rgba(218, 41, 28, 0.433) 60%, transparent 80%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.5rem;
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+
+.gallery-item:hover .gallery-overlay { opacity: 1; }
+
+.gallery-overlay .g-tag {
+  font-family: var(--font-condensed);
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--red-primary);
+  margin-bottom: 0.3rem;
+}
+
+.gallery-overlay .g-title {
+  font-family: var(--font-condensed);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.vid-badge {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 54px; height: 54px;
+  background: transparent; /* Đỏ rõ hơn */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  font-size: 1.3rem;
+  padding-left: 4px; /* Cân bằng icon Play */
+  transition: all var(--transition);
+  box-shadow: 0 4px 15px rgba(218, 41, 28, 0.5);
+  z-index: 5;
+}
+
+.gallery-item:hover .vid-badge {
+  transform: translate(-50%, -50%) scale(1.15);
+  box-shadow: 0 8px 25px rgba(218, 41, 28, 0.7);
+}
+
+/* Lightbox */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 0, 0, 0.85); /* Lớp nền đen mờ */
+  backdrop-filter: blur(12px); /* Hiệu ứng blur */
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--transition);
+}
+
+.lightbox.open,
+.lightbox.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.lightbox img {
+  max-width: 85vw;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 1.5rem; right: 1.5rem;
+  width: 44px; height: 44px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  color: var(--white);
+  font-size: 1.2rem;
+  transition: all var(--transition);
+}
+
+.lightbox-close:hover {
+  background: var(--red-primary);
+  border-color: var(--red-primary);
+  color: var(--white);
+}
+
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px; height: 50px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  color: var(--white);
+  font-size: 1.5rem;
+  transition: all var(--transition);
+  z-index: 2001;
+}
+
+.lightbox-nav:hover {
+  background: var(--red-primary);
+  border-color: var(--red-primary);
+  color: var(--white);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.btn-prev { left: 1.5rem; }
+.btn-next { right: 1.5rem; }
+
+/* ---- HISTORY PAGE ---- */
+.history-stats {
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+  padding: 50px 0 70px;
+  flex-wrap: wrap;
+}
+
+.h-stat {
+  text-align: center;
+}
+
+.h-stat-num {
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  color: var(--red-primary);
+  line-height: 1;
+}
+
+.h-stat-label {
+  font-family: var(--font-condensed);
+  font-size: 0.7rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--gray-mid);
+  margin-top: 0.5rem;
+}
+
+.history-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  padding-bottom: 80px;
+  align-items: start;
+}
+
+/* Honors table */
+.honors-section h2 {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  letter-spacing: 0.08em;
+  margin-bottom: 2rem;
+}
+
+.honors-group {
+  margin-bottom: 2.5rem;
+}
+
+.honors-group-title {
+  font-family: var(--font-condensed);
+  font-size: 0.72rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--red-primary);
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid rgba(218, 41, 28, 0.25);
+  margin-bottom: 1rem;
+}
+
+.honors-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  transition: padding-left var(--transition);
+}
+
+.honors-item:hover { padding-left: 6px; }
+
+.honors-item-name {
+  font-family: var(--font-condensed);
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.honors-item-year {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--red-primary);
+  opacity: 0.55;
+}
+
+/* Timeline */
+.timeline {
+  position: relative;
+  padding-left: 2.5rem;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 8px; top: 0; bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--red-primary), rgba(218, 41, 28, 0.1));
+}
+
+.timeline-item {
+  position: relative;
+  padding-bottom: 2.5rem;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -2.5rem;
+  top: 6px;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--black);
+  border: 2px solid var(--red-primary);
+  transition: background var(--transition), box-shadow var(--transition);
+}
+
+.timeline-item:hover .timeline-dot {
+  background: var(--red-primary);
+  box-shadow: var(--shadow-glow);
+}
+
+.timeline-item-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.timeline-item-link:hover .timeline-title {
+  color: var(--red-primary);
+}
+
+.timeline-year {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: var(--red-primary);
+  opacity: 0.65;
+  margin-bottom: 0.3rem;
+}
+
+.timeline-title {
+  font-family: var(--font-condensed);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.4rem;
+}
+
+.timeline-desc {
+  font-size: 0.85rem;
+  color: var(--gray-mid);
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+/* ---- NEWS PAGE ---- */
+.news-page-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  padding-bottom: 30px;
+}
+
+.news-page-card {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: all var(--transition);
+  cursor: pointer;
+  display: block;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.news-page-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5), var(--shadow-glow);
+  border-color: rgba(218, 41, 28, 0.35);
+}
+
+/* Card image – full bleed 16:9 */
+.news-page-card-image {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+}
+
+.news-page-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow), filter var(--transition);
+  filter: brightness(0.85);
+}
+
+.news-page-card:hover .news-page-card-image img {
+  transform: scale(1.06);
+  filter: brightness(0.65);
+}
+
+/* Gradient overlay on image */
+.news-page-card-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 15%, rgba(13, 0, 0, 0.92) 80%);
+  pointer-events: none;
+  transition: background var(--transition);
+}
+
+.news-page-card:hover .news-page-card-image::after {
+  background: linear-gradient(180deg, transparent 5%, rgba(74, 0, 0, 0.95) 80%);
+}
+
+/* Overlay content on image */
+.news-page-card-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.4rem;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.news-page-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.news-page-tag {
+  font-family: var(--font-condensed);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  background: var(--red-primary);
+  color: var(--white);
+  padding: 0.3rem 0.7rem;
+  border-radius: 3px;
+  font-weight: 700;
+}
+
+.news-page-date {
+  font-family: var(--font-condensed);
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.65);
+  letter-spacing: 0.08em;
+}
+
+.news-page-card-overlay h3 {
+  font-family: var(--font-condensed);
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.35;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--white);
+  transition: color var(--transition);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.news-page-card:hover .news-page-card-overlay h3 {
+  color: var(--gold);
+}
+
+/* Divider line */
+.news-page-card-divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(218, 41, 28, 0.35);
+  margin: 0.15rem 0;
+  transition: background var(--transition);
+}
+
+.news-page-card:hover .news-page-card-divider {
+  background: rgba(218, 41, 28, 0.65);
+}
+
+/* Read more link */
+.news-read-link {
+  font-family: var(--font-condensed);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red-primary);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: gap var(--transition), color var(--transition);
+}
+
+.news-page-card:hover .news-read-link {
+  color: var(--red-mid);
+  gap: 0.7rem;
+}
+
+.news-load-more {
+  text-align: center;
+  padding: 2.5rem 0 80px;
+}
+
+/* ============================================================
+   MU EXCLUSIVE PAGES (News Detail & Player Detail)
+   ============================================================ */
+
+/* NEWS DETAIL PAGE */
+.news-detail-page {
+  padding: 80px 0 120px;
+}
+
+.news-detail-card {
+  background: linear-gradient(160deg, rgba(218, 41, 28, 0.08), rgba(13, 0, 0, 0.25));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 2rem;
+}
+
+.news-detail-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.news-detail-visual img {
+  width: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+  height: 100%;
+  min-height: 380px;
+}
+
+.news-detail-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.news-detail-hero {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 2rem;
+  align-items: end;
+  margin-bottom: 2rem;
+}
+
+.news-detail-header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.news-detail-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  color: var(--gray-mid);
+  font-size: 0.92rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.news-detail-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.55rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(218, 41, 28, 0.12);
+  color: var(--red-primary);
+  font-family: var(--font-condensed);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+}
+
+.news-detail-article {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.news-detail-aside {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.news-detail-aside-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 1.5rem;
+}
+
+.news-detail-aside-card h3 {
+  font-family: var(--font-condensed);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: var(--white);
+}
+
+.news-detail-quickinfo {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.news-detail-quickinfo div {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.8rem;
+  color: var(--gray-mid);
+}
+
+.news-detail-quickinfo strong {
+  color: var(--white);
+  font-weight: 700;
+}
+
+.news-detail-keypoints {
+  list-style: disc;
+  margin-left: 1rem;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.news-detail-keypoints li {
+  color: var(--gray-mid);
+  line-height: 1.8;
+}
+
+.news-detail-intro {
+  color: var(--gray-mid);
+  line-height: 1.9;
+}
+
+.news-detail-copy p {
+  margin-bottom: 1.3rem;
+  line-height: 1.8;
+  color: var(--white);
+}
+
+.news-detail-notfound {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.news-detail-notfound h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.news-detail-notfound p {
+  color: var(--gray-mid);
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 2rem;
+}
+
+/* PLAYER DETAIL PAGE */
+.player-detail-page {
+  padding: 80px 0 120px;
+}
+
+.player-detail-card {
+  background: linear-gradient(160deg, rgba(218, 41, 28, 0.08), rgba(13, 0, 0, 0.25));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 2rem;
+}
+
+.player-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.player-detail-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
+}
+
+.player-detail-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.player-detail-intro {
+  color: var(--gray-mid);
+  line-height: 1.9;
+  max-width: 42rem;
+}
+
+.player-detail-meta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  padding: 1.4rem;
+}
+
+.player-detail-meta div {
+  font-size: 0.95rem;
+  color: var(--white);
+  line-height: 1.7;
+}
+
+.player-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1.4rem;
+}
+
+.player-stat-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 1rem;
+  min-height: 110px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.35rem;
+}
+
+.stat-value {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  color: var(--red-primary);
+  line-height: 1;
+}
+
+.stat-label {
+  font-family: var(--font-condensed);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gray-mid);
+}
+
+.player-detail-notfound {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.player-detail-notfound h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.player-detail-notfound p {
+  color: var(--gray-mid);
+  line-height: 1.8;
+  margin-bottom: 1.6rem;
+}
+
+a.team-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+a.team-card .team-card-body,
+a.team-card .team-card-img {
+  pointer-events: none;
+}
+
+#lightbox-iframe {
+  border-radius: 20px;
+}
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1024px) {
+  .team-grid { grid-template-columns: repeat(3, 1fr); }
+  .news-page-grid { grid-template-columns: repeat(2, 1fr); }
+  .gallery-masonry { columns: 2; }
+  .history-body { grid-template-columns: 1fr; gap: 3rem; }
+}
+
+@media (max-width: 768px) {
+  .lightbox-nav {
+    width: 36px;
+    height: 36px;
+    font-size: 1.2rem;
+  }
+  .btn-prev { left: 0.5rem; }
+  .btn-next { right: 0.5rem; }
+}
+
+@media (max-width: 900px) {
+  .news-detail-hero { grid-template-columns: 1fr; gap: 1rem; }
+  .news-detail-grid { grid-template-columns: 1fr; }
+  .news-detail-visual img { min-height: 250px; height: auto; }
+}
+
+@media (max-width: 700px) {
+  .player-detail-grid { grid-template-columns: 1fr; }
+  .player-detail-meta { grid-template-columns: 1fr; }
+  .player-stats-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 768px) {
+  .team-grid { grid-template-columns: repeat(2, 1fr); }
+  .gallery-masonry { columns: 2; }
+  .history-stats { gap: 2rem; }
+  .h-stat-num { font-size: 2.5rem; }
+  .news-page-grid { grid-template-columns: 1fr; }
+  .lightbox img { max-width: 95vw; max-height: 70vh; }
+}
+
+@media (max-width: 560px) {
+  .news-detail-grid { padding: 0; }
+  .player-stats-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  .gallery-masonry { columns: 1; }
+}

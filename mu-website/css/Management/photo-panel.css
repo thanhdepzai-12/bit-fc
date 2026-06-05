@@ -1,0 +1,139 @@
+/* =========================================================
+   PHOTO PANEL CSS - Dark Theme MUFC — Thư viện ảnh
+   ========================================================= */
+
+@import url("../../css/Management/players-panel.css");
+
+/* ── THUMBNAIL IN TABLE ── */
+.avatar-circle {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--surface);
+}
+.empty-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 6px;
+  background: var(--surface-light);
+  border: 1px dashed rgba(255,255,255,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gray-mid);
+  font-size: 1.2rem;
+}
+
+/* ── TAG BADGE ── */
+.role-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 99px;
+  font-family: var(--font-condensed);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.role-training { background: rgba(46, 204, 113, 0.15); color: #2ecc71; border: 1px solid rgba(46,204,113,0.3); }
+
+/* ── ACTION BTNS ── */
+.action-btns {
+  display: flex; gap: 4px;
+}
+.action-btns .btn-icon {
+  width: 28px; height: 28px; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 13px; transition: var(--transition); cursor: pointer;
+  background: rgba(251,225,34,0.08); border: 1px solid rgba(251,225,34,0.2); color: var(--gold);
+}
+.action-btns .btn-icon:hover {
+  background: rgba(251,225,34,0.18); box-shadow: 0 0 10px rgba(251,225,34,0.2);
+}
+.action-btns .btn-icon-del {
+  background: rgba(218,41,28,0.1); border: 1px solid rgba(218,41,28,0.25); color: var(--red-mid);
+}
+.action-btns .btn-icon-del:hover {
+  background: rgba(218,41,28,0.22); box-shadow: 0 0 10px rgba(218,41,28,0.3);
+}
+
+/* ── UPLOAD MODAL ── */
+.upload-modal-card {
+  background: var(--surface);
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.08);
+  max-width: 640px;
+  width: 95%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+}
+
+/* ── DROP ZONE ── */
+.drop-zone {
+  border: 2px dashed rgba(218,41,28,0.35);
+  border-radius: 12px;
+  padding: 40px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: rgba(218,41,28,0.04);
+}
+.drop-zone.drag-over {
+  border-color: var(--red-primary);
+  background: rgba(218,41,28,0.12);
+  box-shadow: 0 0 30px rgba(218,41,28,0.15) inset;
+}
+.drop-zone:hover {
+  border-color: var(--red-primary);
+  background: rgba(218,41,28,0.08);
+}
+.drop-icon { font-size: 3rem; color: var(--red-primary); margin-bottom: 8px; }
+.drop-text { font-family: var(--font-condensed); font-size: 1.1rem; font-weight: 600; color: #fff; margin: 0; }
+.drop-sub  { font-size: 0.8rem; color: var(--gray-mid); margin: 4px 0 0; }
+.drop-hint { font-size: 0.7rem; color: rgba(255,255,255,0.3); margin-top: 10px; }
+
+/* ── UPLOAD PREVIEW LIST ── */
+.upload-preview-list { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.upload-preview-item {
+  width: 80px; height: 80px; border-radius: 8px; overflow: hidden; position: relative;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.upload-preview-item img { width: 100%; height: 100%; object-fit: cover; }
+.upload-preview-item .remove-preview {
+  position: absolute; top: 2px; right: 2px; width: 18px; height: 18px; border-radius: 50%;
+  background: rgba(218,41,28,0.85); color: #fff; font-size: 10px; border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; transition: all 0.2s;
+}
+.upload-preview-item .remove-preview:hover { background: var(--red-primary); transform: scale(1.15); }
+
+/* ── UPLOAD PROGRESS ── */
+.upload-progress { margin-top: 16px; }
+.progress-text { font-size: 0.8rem; color: var(--gray-mid); margin-bottom: 6px; }
+.progress-bar-wrap { height: 6px; border-radius: 3px; background: rgba(255,255,255,0.08); overflow: hidden; }
+.progress-bar-fill {
+  height: 100%; border-radius: 3px; background: linear-gradient(90deg, var(--red-primary), var(--gold));
+  width: 0%; transition: width 0.4s ease;
+}
+
+/* ── EDIT MODAL ── */
+.edit-modal-card {
+  background: var(--surface); border-radius: 16px; border: 1px solid rgba(255,255,255,0.08);
+  max-width: 480px; width: 95%; box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+}
+.edit-preview { width: 100%; max-height: 250px; border-radius: 8px; overflow: hidden; margin-bottom: 16px; background: rgba(0,0,0,0.2); }
+.edit-preview img { width: 100%; max-height: 250px; object-fit: contain; }
+
+/* ── LIGHTBOX ── */
+.photo-lightbox {
+  position: fixed; inset: 0; z-index: 10000; background: rgba(0,0,0,0.92);
+  display: none; align-items: center; justify-content: center; backdrop-filter: blur(10px);
+}
+.photo-lightbox.show { display: flex; }
+.photo-lightbox img { max-width: 92vw; max-height: 90vh; object-fit: contain; border-radius: 8px; box-shadow: 0 0 60px rgba(0,0,0,0.5); }
+.photo-lightbox .lightbox-close {
+  position: absolute; top: 20px; right: 24px; width: 40px; height: 40px; border-radius: 50%;
+  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff;
+  font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s; z-index: 10001;
+}
+.photo-lightbox .lightbox-close:hover { background: rgba(218,41,28,0.6); }
+
+/* ── FILTER FIX ── */
+.filter-select option, .form-input option { background: #1a0406; color: #fff; }

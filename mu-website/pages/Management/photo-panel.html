@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BIT FC — Thư Viện Ảnh</title>
+  <link rel="icon" href="../../assessts/logoBit.png" />
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../css/Management/photo-panel.css" />
+  <script type="module" src="../../js/Management/auth-guard.js"></script>
+</head>
+<body>
+<div class="dashboard">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <a href="/mu-website/index.html" class="sidebar-logo" style="text-decoration: none; color: inherit;">
+      <div class="logo-crest">
+        <img src="../../assessts/logoBit.png" alt="NONE BIT FC" />
+      </div>
+      <div class="logo-text">
+        <div class="logo-name">BIT FC</div>
+        <div class="logo-sub">The Pride of Banking IT</div>
+      </div>
+    </a>
+    <div class="nav-section-label">Chính</div>
+    <div class="nav-item" data-page="dashboard" onclick="window.location.href='dashboard.html'"><i class="ti ti-layout-dashboard"></i>Tổng quan</div>
+    <div class="nav-item" data-page="players" onclick="window.location.href='players-panel.html'"><i class="ti ti-users"></i>Cầu thủ</div>
+    <div class="nav-item" data-page="staff" onclick="window.location.href='staff-panel.html'"><i class="ti ti-user-circle"></i>Ban huấn luyện</div>
+    <div class="nav-item" data-page="matches" onclick="window.location.href='match-panel.html'"><i class="ti ti-calendar"></i>Lịch thi đấu</div>
+    <div class="nav-section-label">Truyền thông</div>
+    <div class="nav-item" data-page="highlights" onclick="window.location.href='gallery-panel.html'"><i class="ti ti-player-play"></i>Highlights</div>
+    <div class="nav-item" data-page="news" onclick="window.location.href='new-panel.html'"><i class="ti ti-news"></i>Tin tức &amp; Báo</div>
+    <div class="nav-item active" data-page="photos" onclick="window.location.href='photo-panel.html'"><i class="ti ti-photo"></i>Thư viện ảnh</div>
+    <div class="nav-section-label">Khác</div>
+    <div class="nav-item" data-page="trophies"><i class="ti ti-trophy"></i>Thành tích</div>
+    <div class="nav-item" data-page="settings"><i class="ti ti-settings"></i>Cài đặt</div>
+    <div class="sidebar-bottom">
+      <div class="season-badge">Mùa 2024 – 25</div>
+    </div>
+  </aside>
+
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <!-- MAIN -->
+  <div class="main">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+        <div>
+          <div class="greet">Xin chào, Admin</div>
+          <div class="page-title">Quản lý <span>Thư Viện Ảnh</span></div>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <div class="date-chip"><i class="ti ti-calendar"></i><span id="current-date"></span></div>
+        <button class="icon-btn" aria-label="Thông báo"><i class="ti ti-bell"></i><span class="dot"></span></button>
+        <button class="avatar-btn" id="btn-logout" title="Đăng xuất" aria-label="Tài khoản">AD</button>
+      </div>
+    </header>
+
+    <main class="content">
+      <!-- TOOLBAR -->
+      <div class="players-toolbar">
+        <div class="search-wrap">
+          <i class="ti ti-search"></i>
+          <input type="text" class="search-input" id="search-input" placeholder="Tìm ảnh theo tên, tag..." />
+        </div>
+        <select class="filter-select" id="filter-tag">
+          <option value="">Tất cả tag</option>
+        </select>
+        <div class="toolbar-spacer"></div>
+        <button class="btn-add" id="btn-upload">
+          <i class="ti ti-upload"></i><span>Upload ảnh</span>
+        </button>
+      </div>
+
+      <!-- COUNT -->
+      <div class="count-bar">
+        <span>Hiển thị</span>
+        <span class="count-num" id="count-shown">0</span>
+        <span class="count-sep">/</span>
+        <span class="count-num" id="count-total">0</span>
+        <span>ảnh</span>
+      </div>
+
+      <!-- TABLE -->
+      <div class="table-panel">
+        <div class="table-wrap">
+          <table class="players-table" id="photo-table">
+            <thead>
+              <tr>
+                <th style="width: 70px; text-align: center;">Ảnh</th>
+                <th class="sortable" data-sort="title">Tên ảnh <i class="ti ti-selector sort-icon"></i></th>
+                <th style="width: 150px;">Tag</th>
+                <th style="width: 120px;" class="sortable" data-sort="createdAt">Ngày up <i class="ti ti-selector sort-icon"></i></th>
+                <th style="width: 100px;">Kích thước</th>
+                <th class="col-action">Hành động</th>
+              </tr>
+            </thead>
+            <tbody id="table-body">
+              <tr>
+                <td colspan="6" class="empty-state">
+                  <div class="spinner"></div> Đang tải dữ liệu...
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- PAGINATION -->
+      <div class="pagination-bar" id="pagination-bar">
+        <span class="pagination-info" id="page-info"></span>
+        <div class="pagination-controls"></div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- ── UPLOAD MODAL ── -->
+<div class="modal-overlay" id="upload-modal">
+  <div class="upload-modal-card">
+    <div class="modal-header">
+      <div class="modal-title">Upload <span>Ảnh</span></div>
+      <button class="modal-close" id="btn-close-upload"><i class="ti ti-x"></i></button>
+    </div>
+
+    <div class="modal-body">
+      <!-- Drop Zone -->
+      <div class="drop-zone" id="drop-zone">
+        <div class="drop-zone-inner">
+          <i class="ti ti-cloud-upload drop-icon"></i>
+          <p class="drop-text">Kéo thả ảnh vào đây</p>
+          <p class="drop-sub">hoặc click để chọn file</p>
+          <p class="drop-hint">JPG, PNG, WebP · Tối đa 5MB mỗi file</p>
+        </div>
+        <input type="file" id="file-input" accept="image/*" multiple style="display:none" />
+      </div>
+
+      <!-- Upload Preview List -->
+      <div class="upload-preview-list" id="upload-preview-list"></div>
+
+      <!-- Tag Input -->
+      <div class="form-group" style="margin-top: 16px;">
+        <label class="form-label">Thẻ Tag (áp dụng cho tất cả ảnh)</label>
+        <input type="text" class="form-input" id="inp-tag" placeholder="VD: Training, Match Day, Behind the scenes..." />
+      </div>
+
+      <!-- Progress -->
+      <div class="upload-progress" id="upload-progress" style="display: none;">
+        <div class="progress-text" id="progress-text">Đang upload 0/0...</div>
+        <div class="progress-bar-wrap">
+          <div class="progress-bar-fill" id="progress-fill"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn-cancel" id="btn-cancel-upload">Hủy</button>
+      <button class="btn-save" id="btn-start-upload" disabled>
+        <i class="ti ti-upload"></i> Upload tất cả
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ── EDIT MODAL ── -->
+<div class="modal-overlay" id="edit-modal">
+  <div class="edit-modal-card">
+    <div class="modal-header">
+      <div class="modal-title">Chỉnh sửa <span>Ảnh</span></div>
+      <button class="modal-close" id="btn-close-edit"><i class="ti ti-x"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="edit-preview">
+        <img id="edit-preview-img" src="" alt="Preview" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Tên ảnh</label>
+        <input type="text" class="form-input" id="edit-title" placeholder="Tên ảnh..." />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Thẻ Tag</label>
+        <input type="text" class="form-input" id="edit-tag" placeholder="VD: Match Day..." />
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-cancel" id="btn-cancel-edit">Hủy</button>
+      <button class="btn-save" id="btn-save-edit">
+        <i class="ti ti-device-floppy"></i> Lưu thay đổi
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ── DELETE MODAL ── -->
+<div class="modal-overlay" id="delete-modal">
+  <div class="delete-card">
+    <div class="delete-body">
+      <div class="delete-icon-wrap"><i class="ti ti-trash"></i></div>
+      <div class="delete-title">Xác nhận xóa</div>
+      <div class="delete-msg">
+        Bạn có chắc muốn xóa ảnh này?<br>
+        Hành động này không thể hoàn tác.
+      </div>
+    </div>
+    <div class="delete-footer">
+      <button class="btn-cancel" id="btn-cancel-del">Hủy</button>
+      <button class="btn-del-confirm" id="btn-confirm-del">Xóa ngay</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── LIGHTBOX ── -->
+<div class="photo-lightbox" id="photo-lightbox">
+  <button class="lightbox-close" id="lightbox-close"><i class="ti ti-x"></i></button>
+  <img id="lightbox-img" src="" alt="Photo" />
+</div>
+
+<!-- TOAST -->
+<div id="toast" class="toast">Thành công!</div>
+
+<script src="../../js/Management/sidebar.js"></script>
+<script type="module" src="../../js/Management/photo-panel.js"></script>
+</body>
+</html>

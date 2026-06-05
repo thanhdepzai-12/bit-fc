@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BIT FC — Gallery Highlight</title>
+  <link rel="icon" href="../../assessts/logoBit.png" />
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../css/Management/gallery-panel.css" />
+  <script type="module" src="../../js/Management/auth-guard.js"></script>
+</head>
+<body>
+<div class="dashboard">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <a href="/mu-website/index.html" class="sidebar-logo" style="text-decoration: none; color: inherit;">
+      <div class="logo-crest">
+        <img src="../../assessts/logoBit.png" alt="NONE BIT FC" />
+      </div>
+      <div class="logo-text">
+        <div class="logo-name">BIT FC</div>
+        <div class="logo-sub">The Pride of Banking IT</div>
+      </div>
+    </a>
+    <div class="nav-section-label">Chính</div>
+    <div class="nav-item" data-page="dashboard" onclick="window.location.href='dashboard.html'"><i class="ti ti-layout-dashboard"></i>Tổng quan</div>
+    <div class="nav-item" data-page="players" onclick="window.location.href='players-panel.html'"><i class="ti ti-users"></i>Cầu thủ</div>
+    <div class="nav-item" data-page="staff" onclick="window.location.href='staff-panel.html'"><i class="ti ti-user-circle"></i>Ban huấn luyện</div>
+    <div class="nav-item" data-page="matches" onclick="window.location.href='match-panel.html'"><i class="ti ti-calendar"></i>Lịch thi đấu</div>
+    <div class="nav-section-label">Truyền thông</div>
+    <div class="nav-item active" data-page="highlights" onclick="window.location.href='gallery-panel.html'"><i class="ti ti-player-play"></i>Highlights</div>
+    <div class="nav-item" data-page="news" onclick="window.location.href='new-panel.html'"><i class="ti ti-news"></i>Tin tức &amp; Báo</div>
+    <div class="nav-item" data-page="photos" onclick="window.location.href='photo-panel.html'"><i class="ti ti-photo"></i>Thư viện ảnh</div>
+    <div class="nav-section-label">Khác</div>
+    <div class="nav-item" data-page="trophies"><i class="ti ti-trophy"></i>Thành tích</div>
+    <div class="nav-item" data-page="settings"><i class="ti ti-settings"></i>Cài đặt</div>
+    <div class="sidebar-bottom">
+      <div class="season-badge">Mùa 2024 – 25</div>
+    </div>
+  </aside>
+
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <!-- MAIN -->
+  <div class="main">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+        <div>
+          <div class="greet">Xin chào, Admin</div>
+          <div class="page-title">Quản lý <span>Highlights</span></div>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <div class="date-chip"><i class="ti ti-calendar"></i><span id="current-date"></span></div>
+        <button class="icon-btn" aria-label="Thông báo"><i class="ti ti-bell"></i><span class="dot"></span></button>
+        <button class="avatar-btn" id="btn-logout" title="Đăng xuất" aria-label="Tài khoản">AD</button>
+      </div>
+    </header>
+
+    <main class="content">
+      <!-- TOOLBAR -->
+      <div class="players-toolbar">
+        <div class="search-wrap">
+          <i class="ti ti-search"></i>
+          <input type="text" class="search-input" id="search-input" placeholder="Tìm kiếm tiêu đề, video ID..." />
+        </div>
+        <select class="filter-select" id="filter-category">
+          <option value="">Tất cả thể loại</option>
+          <option value="Match">Trận đấu (Match)</option>
+          <option value="Training">Tập luyện (Training)</option>
+          <option value="Behind">Hậu trường (Behind)</option>
+          <option value="Skills">Kỹ năng (Skills)</option>
+        </select>
+        <div class="toolbar-spacer"></div>
+        <button class="btn-add" id="btn-add">
+          <i class="ti ti-plus"></i><span>Thêm video</span>
+        </button>
+      </div>
+
+      <!-- COUNT -->
+      <div class="count-bar">
+        <span>Hiển thị</span>
+        <span class="count-num" id="count-shown">0</span>
+        <span class="count-sep">/</span>
+        <span class="count-num" id="count-total">0</span>
+        <span>video</span>
+      </div>
+
+      <!-- TABLE -->
+      <div class="table-panel">
+        <div class="table-wrap">
+          <table class="players-table" id="players-table">
+            <thead>
+              <tr>
+                <th style="width: 80px; text-align: center;">Thumb</th>
+                <th class="sortable" data-sort="title" style="width: auto;">Tiêu đề video <i class="ti ti-selector sort-icon"></i></th>
+                <th style="width: 150px;">Video ID</th>
+                <th style="width: 150px;">Thể loại</th>
+                <th class="col-action">Hành động</th>
+              </tr>
+            </thead>
+            <tbody id="table-body">
+              <tr>
+                <td colspan="5" class="empty-state">
+                  <div class="spinner"></div> Đang tải dữ liệu...
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- PAGINATION -->
+      <div class="pagination-bar" id="pagination-bar">
+        <span class="pagination-info" id="page-info"></span>
+        <div class="pagination-controls">
+          <button class="page-btn" id="btn-prev"><i class="ti ti-chevron-left"></i></button>
+          <button class="page-btn" id="btn-next"><i class="ti ti-chevron-right"></i></button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- ── FORM MODAL (Thêm / Sửa) ── -->
+  <div class="modal-overlay" id="form-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title" id="modal-title">Thêm <span>Video</span></div>
+        <button class="modal-close" id="btn-close-modal"><i class="ti ti-x"></i></button>
+      </div>
+
+      <div class="modal-body">
+        <div class="form-section-title">Thông tin Video</div>
+
+        <form id="data-form">
+          <div style="display:flex; gap: 20px; padding: 20px;">
+            <!-- Left: Thumbnail -->
+            <div style="flex-shrink: 0; width: 120px;">
+              <div class="upload-area" id="thumbnail-preview-area" style="width: 120px; height: 120px; border-radius: 50%; border: 2px dashed rgba(255,255,255,0.2); background: rgba(0,0,0,0.2); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+                <div class="upload-placeholder" id="thumbnail-placeholder" style="text-align: center; color: var(--gray-mid); font-size: 0.75rem;">
+                  <i class="ti ti-brand-youtube" style="font-size: 1.5rem; color: var(--red-primary);"></i>
+                  <br>Tự động
+                </div>
+                <img src="" alt="Preview" id="thumbnail-img" style="display:none; position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover;" />
+              </div>
+            </div>
+
+            <!-- Right: Inputs -->
+            <div style="flex-grow: 1; display: grid; grid-template-columns: 1fr; gap: 15px;">
+              <div class="form-group" style="margin-bottom:0;">
+                <label class="form-label">Tiêu đề video *</label>
+                <input type="text" class="form-input" id="inp-title" required placeholder="VD: Highlight MU vs Man City" />
+              </div>
+
+              <div class="form-group" style="margin-bottom:0;">
+                <label class="form-label">Video ID hoặc Link YouTube *</label>
+                <input type="text" class="form-input" id="inp-videoId" required placeholder="VD: dQw4w9WgXcQ" />
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                <div class="form-group" style="margin-bottom:0;">
+                  <label class="form-label">Thể loại</label>
+                  <select class="form-input" id="inp-category">
+                    <option value="Match">Trận đấu</option>
+                    <option value="Training">Tập luyện</option>
+                    <option value="Behind">Hậu trường</option>
+                    <option value="Skills">Kỹ năng</option>
+                  </select>
+                </div>
+                <div class="form-group" style="margin-bottom:0;">
+                  <label class="form-label">Thẻ Tag (Tùy chọn)</label>
+                  <input type="text" class="form-input" id="inp-tag" placeholder="VD: Premier League..." />
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div><!-- /modal-body -->
+
+      <div class="modal-footer">
+        <button type="button" class="btn-cancel" id="btn-cancel">Hủy</button>
+        <button type="submit" form="data-form" class="btn-save" id="btn-save">
+          <i class="ti ti-device-floppy"></i> Lưu Video
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── DELETE MODAL ── -->
+  <div class="modal-overlay" id="delete-modal">
+    <div class="delete-card">
+      <div class="delete-body">
+        <div class="delete-icon-wrap"><i class="ti ti-trash"></i></div>
+        <div class="delete-title">Xác nhận xóa</div>
+        <div class="delete-msg">
+          Bạn có chắc muốn xóa video này?<br>
+          Hành động này không thể hoàn tác.
+        </div>
+      </div>
+      <div class="delete-footer">
+        <button class="btn-cancel" id="btn-cancel-del">Hủy</button>
+        <button class="btn-del-confirm" id="btn-confirm-del">Xóa ngay</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- TOAST MESSAGE -->
+<div id="toast" class="toast">Thành công!</div>
+
+<script src="../../js/Management/sidebar.js"></script>
+<script type="module" src="../../js/Management/gallery-panel.js"></script>
+</body>
+</html>

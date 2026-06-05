@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BIT FC — Tin Tức</title>
+<link rel="icon" href="../../assessts/logoBit.png" />
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../css/Management/new-panel.css" />
+    <script type="module" src="../../js/Management/auth-guard.js"></script>
+</head>
+<body>
+<div class="dashboard">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <a href="/mu-website/index.html" class="sidebar-logo" style="text-decoration: none; color: inherit;">
+      <div class="logo-crest">
+        <img src="../../assessts/logoBit.png" alt="NONE BIT FC" />
+      </div>
+      <div class="logo-text">
+        <div class="logo-name">BIT FC</div>
+        <div class="logo-sub">The Pride of Banking IT</div>
+      </div>
+    </a>
+    <div class="nav-section-label">Chính</div>
+    <a href="dashboard.html" class="nav-item"><i class="ti ti-layout-dashboard"></i>Tổng quan</a>
+    <a href="players-panel.html" class="nav-item"><i class="ti ti-users"></i>Cầu thủ</a>
+    <a href="staff-panel.html" class="nav-item"><i class="ti ti-user-circle"></i>Ban huấn luyện</a>
+    <a href="match-panel.html" class="nav-item"><i class="ti ti-calendar"></i>Lịch thi đấu</a>
+    
+    <div class="nav-section-label">Truyền thông</div>
+    <a href="gallery-panel.html" class="nav-item"><i class="ti ti-player-play"></i>Highlights</a>
+    <a href="new-panel.html" class="nav-item active"><i class="ti ti-news"></i>Tin tức &amp; Báo</a>
+    <a href="photo-panel.html" class="nav-item"><i class="ti ti-photo"></i>Thư viện ảnh</a>
+    
+    <div class="nav-section-label">Khác</div>
+    <a href="#" class="nav-item"><i class="ti ti-trophy"></i>Thành tích</a>
+    <a href="#" class="nav-item"><i class="ti ti-settings"></i>Cài đặt</a>
+    <div class="sidebar-bottom">
+      <div class="season-badge">Mùa 2024 – 25</div>
+    </div>
+  </aside>
+
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <!-- MAIN -->
+  <div class="main">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+        <div>
+          <div class="greet">Xin chào, Admin</div>
+          <div class="page-title">Quản lý <span>Tin Tức</span></div>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <div class="date-chip"><i class="ti ti-calendar"></i><span id="current-date"></span></div>
+        <button class="icon-btn" aria-label="Thông báo"><i class="ti ti-bell"></i><span class="dot"></span></button>
+        <button class="avatar-btn" aria-label="Tài khoản">AD</button>
+      </div>
+    </header>
+
+    <main class="content">
+
+      <!-- TOOLBAR -->
+      <div class="news-toolbar">
+        <div class="search-wrap">
+          <i class="ti ti-search"></i>
+          <input type="text" class="search-input" id="search-input" placeholder="Tìm bài báo..." />
+        </div>
+        <select class="filter-select" id="filter-cat">
+          <option value="">Tất cả danh mục</option>
+          <option value="Match Report">Match Report</option>
+          <option value="Official">Official</option>
+          <option value="Analysis">Analysis</option>
+          <option value="Team News">Team News</option>
+          <option value="Interview">Interview</option>
+          <option value="Women">Women</option>
+          <option value="Rumour">Rumour</option>
+          <option value="Tickets">Tickets</option>
+          <option value="Loan Watch">Loan Watch</option>
+          <option value="Other">Other</option>
+        </select>
+        <select class="filter-select" id="filter-status">
+          <option value="">Tất cả trạng thái</option>
+          <option value="published">Published</option>
+          <option value="draft">Draft</option>
+        </select>
+        <div class="toolbar-spacer"></div>
+        <button class="btn-add" id="btn-add-news">
+          <i class="ti ti-plus"></i><span>Thêm bài báo</span>
+        </button>
+      </div>
+
+      <!-- COUNT -->
+      <div class="count-bar">
+        <span>Hiển thị</span>
+        <span class="count-num" id="count-shown">0</span>
+        <span class="count-sep">/</span>
+        <span class="count-num" id="count-total">0</span>
+        <span>bài báo</span>
+        <span class="count-sep">|</span>
+        <span class="pub-count"><i class="ti ti-circle-check"></i> <span id="count-pub">0</span> published</span>
+        <span class="count-sep">·</span>
+        <span class="draft-count"><i class="ti ti-pencil"></i> <span id="count-draft">0</span> draft</span>
+      </div>
+
+      <!-- TABLE -->
+      <div class="table-panel">
+        <div class="table-wrap">
+          <table class="news-table" id="news-table">
+            <thead>
+              <tr>
+                <th class="col-cover">Ảnh</th>
+                <th class="col-title sortable" data-col="title">Tiêu đề <i class="ti ti-selector sort-icon"></i></th>
+                <th class="col-cat">Danh mục</th>
+                <th class="col-author">Tác giả</th>
+                <th class="col-date sortable" data-col="publishedAt">Ngày đăng <i class="ti ti-selector sort-icon"></i></th>
+                <th class="col-status">Trạng thái</th>
+                <th class="col-action">Hành động</th>
+              </tr>
+            </thead>
+            <tbody id="news-tbody"></tbody>
+          </table>
+        </div>
+        <div class="pagination-bar" id="pagination-bar">
+          <span class="pagination-info"></span>
+          <div class="pagination-controls"></div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- ══ FORM MODAL (Thêm / Sửa) ══ -->
+<div class="modal-overlay" id="form-modal">
+  <div class="modal-card news-modal-card">
+    <div class="modal-header">
+      <div class="modal-title" id="form-modal-title">Thêm <span>Bài Báo</span></div>
+      <button class="modal-close" id="form-modal-close"><i class="ti ti-x"></i></button>
+    </div>
+
+    <div class="news-modal-layout">
+
+      <!-- LEFT: ảnh bìa -->
+      <div class="news-modal-left">
+        <div class="cover-upload-area" id="cover-drop-zone">
+          <div class="cover-preview-wrap" id="cover-preview-wrap">
+            <img id="cover-preview-img" src="" alt="Preview" style="display:none" />
+            <div class="cover-placeholder" id="cover-placeholder">
+              <i class="ti ti-photo-up"></i>
+              <span>Kéo thả hoặc<br/>click để chọn ảnh</span>
+              <small>JPG, PNG, WebP · Tối đa 5MB</small>
+            </div>
+          </div>
+          <input type="file" id="cover-file-input" accept="image/*" style="display:none" />
+          <div class="cover-actions" id="cover-actions" style="display:none">
+            <button class="cover-action-btn" id="cover-change-btn" type="button">
+              <i class="ti ti-refresh"></i> Đổi ảnh
+            </button>
+            <button class="cover-action-btn danger" id="cover-remove-btn" type="button">
+              <i class="ti ti-trash"></i> Xóa
+            </button>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-top:14px">
+          <label class="form-label">URL ảnh ngoài (tuỳ chọn)</label>
+          <input type="text" class="form-input" id="f-cover-url" placeholder="https://..." />
+          <div class="form-hint">Dùng URL nếu không upload file</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Trạng thái</label>
+          <div class="status-toggle-wrap">
+            <button class="status-toggle-btn active" id="status-published-btn" data-val="published" type="button">
+              <i class="ti ti-circle-check"></i> Published
+            </button>
+            <button class="status-toggle-btn" id="status-draft-btn" data-val="draft" type="button">
+              <i class="ti ti-pencil"></i> Draft
+            </button>
+          </div>
+          <input type="hidden" id="f-status" value="published" />
+        </div>
+      </div>
+
+      <!-- RIGHT: nội dung -->
+      <div class="news-modal-right">
+        <div class="form-section-title">Thông tin bài báo</div>
+
+        <div class="form-group">
+          <label class="form-label">Tiêu đề *</label>
+          <input type="text" class="form-input" id="f-title" placeholder="Nhập tiêu đề bài báo..." />
+        </div>
+
+        <div class="form-row-2">
+          <div class="form-group">
+            <label class="form-label">Danh mục *</label>
+            <select class="form-select" id="f-cat">
+              <option value="">Chọn danh mục</option>
+              <option value="Match Report">Match Report</option>
+              <option value="Official">Official</option>
+              <option value="Analysis">Analysis</option>
+              <option value="Team News">Team News</option>
+              <option value="Interview">Interview</option>
+              <option value="Women">Women</option>
+              <option value="Rumour">Rumour</option>
+              <option value="Tickets">Tickets</option>
+              <option value="Loan Watch">Loan Watch</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Tác giả</label>
+            <input type="text" class="form-input" id="f-author" placeholder="BIT FC Media" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Slug (URL)</label>
+          <div class="slug-wrap">
+            <span class="slug-prefix">news/</span>
+            <input type="text" class="form-input slug-input" id="f-slug" placeholder="tu-dong-sinh-tu-tieu-de" />
+          </div>
+          <div class="form-hint">Tự động sinh từ tiêu đề, có thể chỉnh tay</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Tóm tắt</label>
+          <textarea class="form-textarea" id="f-summary" rows="2" placeholder="Mô tả ngắn hiển thị ở card danh sách..."></textarea>
+        </div>
+
+        <div class="form-section-title" style="margin-top:10px">Nội dung</div>
+        <div class="form-group">
+          <label class="form-label">Nội dung đầy đủ</label>
+          <textarea class="form-textarea" id="f-content" rows="6" placeholder="Viết nội dung bài báo..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Tags (cách nhau bởi dấu phẩy)</label>
+          <input type="text" class="form-input" id="f-tags" placeholder="BIT FC, derby, premier league" />
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn-cancel" id="form-cancel-btn">Hủy</button>
+      <button class="btn-save" id="form-save-btn">
+        <i class="ti ti-device-floppy"></i> Lưu bài báo
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ DELETE MODAL ══ -->
+<div class="modal-overlay" id="delete-modal">
+  <div class="delete-card">
+    <div class="delete-body">
+      <div class="delete-icon-wrap"><i class="ti ti-trash"></i></div>
+      <div class="delete-title">Xác nhận xóa</div>
+      <div class="delete-msg">
+        Bạn có chắc muốn xóa bài báo<br>
+        <span class="delete-name" id="delete-news-title">—</span>?<br>
+        Ảnh bìa và dữ liệu sẽ bị xóa vĩnh viễn.
+      </div>
+    </div>
+    <div class="delete-footer">
+      <button class="btn-cancel" id="delete-cancel-btn">Hủy</button>
+      <button class="btn-del-confirm" id="delete-confirm-btn">Xóa ngay</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast-wrap" id="toast-wrap"></div>
+
+<script type="module" src="../../js/Management/new-panel.js"></script>
+</body>
+</html>

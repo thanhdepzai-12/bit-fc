@@ -1,0 +1,412 @@
+/* ============================================================
+   STAFF PROFILE CSS (Red & Black Vibe)
+   ============================================================ */
+
+.staff-profile-page {
+  padding: 80px 0 120px;
+}
+
+/* ---- KHUNG TOP: CHIA 2 CỘT ---- */
+.profile-top-grid {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+/* 1. THẺ ẢNH BÊN TRÁI (HIỆU ỨNG SHIMMER Y HỆT TRANG TEAM) */
+.profile-hero-card {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  border-radius: 16px;
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(218, 41, 28, 0.06) 0%, rgba(139, 0, 0, 0.18) 100%);
+  border: 1px solid rgba(218, 41, 28, 0.2);
+  transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+  cursor: default;
+}
+
+.profile-hero-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 0.6s ease;
+}
+
+.profile-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(13, 0, 0, 0.95) 0%, rgba(13, 0, 0, 0.2) 60%, transparent 100%);
+  pointer-events: none;
+}
+
+.profile-hero-text {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  z-index: 5;
+}
+
+.profile-hero-text span {
+  font-family: var(--font-condensed);
+  font-size: 0.8rem;
+  letter-spacing: 0.3em;
+  color: var(--red-primary);
+  text-transform: uppercase;
+}
+
+.profile-hero-text h2 {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  color: var(--white);
+  line-height: 1;
+  text-transform: uppercase;
+  margin-top: 0.3rem;
+}
+
+/* Hiệu ứng nảy và bóng đổ đỏ */
+.profile-hero-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  border-color: rgba(218, 41, 28, 0.6);
+  box-shadow: 0 15px 50px rgba(218, 41, 28, 0.4), inset 0 0 40px rgba(218, 41, 28, 0.1);
+}
+.profile-hero-card:hover img {
+  transform: scale(1.08);
+}
+
+/* Hiệu ứng Shimmer xẹt sáng */
+.profile-hero-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  background: linear-gradient(115deg, transparent 20%, rgba(255, 255, 255, 0.1) 40%, rgba(255, 220, 200, 0.2) 50%, rgba(255, 255, 255, 0.1) 60%, transparent 80%);
+  background-size: 200% 100%;
+  transform: translateX(-100%) skewX(-15deg);
+  pointer-events: none;
+}
+.profile-hero-card:hover::before {
+  animation: shimmerSlideProfile 0.7s ease forwards;
+}
+@keyframes shimmerSlideProfile {
+  0%   { transform: translateX(-120%) skewX(-15deg); opacity: 1; }
+  100% { transform: translateX(120%)  skewX(-15deg); opacity: 0.6; }
+}
+
+/* 2. CỘT PHẢI: THÔNG TIN CHI TIẾT */
+.profile-info-section {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Chữ Vị trí: Đỏ chữ Trắng */
+.profile-badge {
+  display: inline-block;
+  align-self: flex-start;
+  background: var(--red-primary);
+  color: var(--white);
+  font-family: var(--font-condensed);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.4rem 1rem;
+  border-radius: 4px;
+  margin-bottom: 0.8rem;
+  box-shadow: 0 4px 15px rgba(218, 41, 28, 0.4);
+}
+
+/* Tên To */
+.profile-name {
+  margin-top: 1rem;
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 5vw, 5.5rem);
+  line-height: 0.95;
+  text-transform: uppercase;
+  color: var(--white);
+  text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+
+.profile-subtitle {
+  font-family: var(--font-condensed);
+  font-size: 0.85rem;
+  letter-spacing: 0.4em;
+  color: var(--red-primary);
+  margin-top: 0.8rem;
+  margin-bottom: 2.5rem;
+}
+
+/* Ô Basic Info */
+.profile-basic-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.basic-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  transition: 0.01s linear;
+}
+
+.basic-label {
+  font-family: var(--font-condensed);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: var(--gray-mid);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.basic-label i { color: var(--red-primary); font-size: 1rem; }
+
+.basic-value {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: var(--white);
+  line-height: 1;
+  text-transform: uppercase;
+  word-break: break-word;
+}
+
+/* Hồ sơ */
+.profile-bio-box {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2.5rem;
+  position: relative;
+}
+
+.bio-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.2rem;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding-bottom: 0.8rem;
+}
+
+.bio-title {
+  font-family: var(--font-condensed);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: 0.1em;
+}
+.bio-header i { color: rgba(255,255,255,0.1); font-size: 1.5rem; }
+
+.bio-text {
+  color: var(--gray-light);
+  line-height: 1.8;
+  font-size: 0.95rem;
+}
+
+.bio-dropcap {
+  float: left;
+  font-family: var(--font-display);
+  font-size: 3rem;
+  line-height: 0.8;
+  color: var(--red-primary);
+  margin-right: 8px;
+  margin-top: 4px;
+}
+
+/* Ô CHỈ SỐ */
+.profile-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.stat-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.4s ease;
+  cursor: default;
+}
+
+.stat-card .stat-label {
+  font-family: var(--font-condensed);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--gray-mid);
+}
+
+.stat-card .stat-value {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  color: var(--white);
+  line-height: 1;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--red-primary);
+  background: rgba(218, 41, 28, 0.05);
+  box-shadow: 0 8px 25px rgba(218, 41, 28, 0.35), inset 0 0 10px rgba(218, 41, 28, 0.1);
+}
+.basic-card:hover {
+   transform: translateY(-5px);
+  border-color: var(--red-primary);
+  background: rgba(218, 41, 28, 0.05);
+    transition: 0.1s linear;
+  box-shadow: 0 8px 25px rgba(218, 41, 28, 0.35), inset 0 0 10px rgba(218, 41, 28, 0.1);
+}
+.basic-card:hover .basic-value{
+    color: var(--red-primary);
+  text-shadow: 0 0 10px rgba(218, 41, 28, 0.8);
+  transition: 0.1s linear;
+}
+.stat-card:hover .stat-value {
+  color: var(--red-primary);
+  text-shadow: 0 0 10px rgba(218, 41, 28, 0.8);
+}
+
+/* ---- BOTTOM SECTION: KHOẢNH KHẮC & SLIDER ---- */
+.profile-moments-section {
+  margin-top: 5rem;
+  padding-top: 3rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.moments-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.moments-header h2 {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  text-transform: uppercase;
+}
+.moments-header h2 .highlight { color: var(--red-primary); }
+
+.moments-tabs {
+  display: flex;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 4px;
+  border-radius: 99px;
+}
+
+.moments-tabs button {
+  background: transparent;
+  border: none;
+  color: var(--gray-mid);
+  padding: 6px 16px;
+  border-radius: 99px;
+  font-family: var(--font-condensed);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.moments-tabs button.active, .moments-tabs button:hover {
+  background: var(--red-primary);
+  color: var(--white);
+}
+
+.moments-slider {
+  display: flex;
+  gap: 1.2rem;
+  overflow-x: auto;
+  padding-bottom: 1.5rem;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--red-primary) rgba(255,255,255,0.05);
+}
+
+.moments-slider::-webkit-scrollbar { height: 6px; }
+.moments-slider::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 10px; }
+.moments-slider::-webkit-scrollbar-thumb { background: var(--red-primary); border-radius: 10px; }
+
+.moment-item {
+  flex: 0 0 calc(33.333% - 0.8rem);
+  min-width: 300px;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  scroll-snap-align: start;
+  cursor: pointer;
+}
+
+.moment-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease, filter 0.5s ease;
+  filter: brightness(0.6);
+}
+
+.moment-item:hover img {
+  transform: scale(1.05);
+  filter: brightness(0.9);
+}
+
+.moment-type-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-family: var(--font-condensed);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.moment-type-badge.video { background: rgba(218,41,28,0.9); color: white; }
+.moment-type-badge.photo { background: rgba(255,255,255,0.9); color: black; }
+
+.moment-title {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 30px 1rem 1rem;
+  background: linear-gradient(to top, rgba(0,0,0,0.95), transparent);
+  font-family: var(--font-condensed);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--white);
+  transition: color 0.3s;
+}
+.moment-item:hover .moment-title { color: var(--red-primary); }
+
+@media (max-width: 900px) {
+  .profile-top-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .profile-hero-card { max-width: 400px; margin: 0 auto; }
+  .moment-item { flex: 0 0 calc(50% - 0.6rem); }
+}
+
+@media (max-width: 500px) {
+  .profile-basic-grid { grid-template-columns: 1fr, 1fr }
+  .profile-stats-grid { grid-template-columns: 1fr, 1fr }
+  .moment-item { flex: 0 0 90%; }
+}

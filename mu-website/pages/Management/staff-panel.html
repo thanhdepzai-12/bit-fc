@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BIT FC — Ban Huấn Luyện</title>
+  <link rel="icon" href="../../assessts/logoBit.png" />
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../css/Management/staff-panel.css" />
+  <!-- 🔒 Private Route Guard -->
+  <script type="module" src="../../js/Management/auth-guard.js"></script>
+</head>
+<body>
+<div class="dashboard">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <a href="/mu-website/index.html" class="sidebar-logo" style="text-decoration: none; color: inherit;">
+      <div class="logo-crest">
+        <img src="../../assessts/logoBit.png" alt="NONE BIT FC" />
+      </div>
+      <div class="logo-text">
+        <div class="logo-name">BIT FC</div>
+        <div class="logo-sub">The Pride of Banking IT</div>
+      </div>
+    </a>
+    <div class="nav-section-label">Chính</div>
+    <a href="dashboard.html" class="nav-item"><i class="ti ti-layout-dashboard"></i>Tổng quan</a>
+    <a href="players-panel.html" class="nav-item"><i class="ti ti-users"></i>Cầu thủ</a>
+    <a href="staff-panel.html" class="nav-item active"><i class="ti ti-user-circle"></i>Ban huấn luyện</a>
+    <a href="match-panel.html" class="nav-item"><i class="ti ti-calendar"></i>Lịch thi đấu</a>
+    <div class="nav-section-label">Truyền thông</div>
+    <a href="gallery-panel.html" class="nav-item"><i class="ti ti-player-play"></i>Highlights</a>
+    <a href="new-panel.html" class="nav-item"><i class="ti ti-news"></i>Tin tức &amp; Báo</a>
+    <a href="photo-panel.html" class="nav-item"><i class="ti ti-photo"></i>Thư viện ảnh</a>
+    <div class="nav-section-label">Khác</div>
+    <a href="#" class="nav-item"><i class="ti ti-trophy"></i>Thành tích</a>
+    <a href="#" class="nav-item"><i class="ti ti-settings"></i>Cài đặt</a>
+    <div class="sidebar-bottom">
+      <div class="season-badge">Mùa 2024 – 25</div>
+    </div>
+  </aside>
+
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <!-- MAIN -->
+  <div class="main">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+        <div>
+          <div class="greet">Xin chào, Admin</div>
+          <div class="page-title">Quản lý <span>Ban Huấn Luyện</span></div>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <div class="date-chip"><i class="ti ti-calendar"></i><span id="current-date"></span></div>
+        <button class="icon-btn" aria-label="Thông báo"><i class="ti ti-bell"></i><span class="dot"></span></button>
+        <button class="avatar-btn" aria-label="Tài khoản">AD</button>
+      </div>
+    </header>
+
+    <main class="content">
+      <!-- TOOLBAR -->
+      <div class="staff-toolbar">
+        <div class="search-wrap">
+          <i class="ti ti-search"></i>
+          <input type="text" class="search-input" id="search-input" placeholder="Tìm thành viên..." />
+        </div>
+        <select class="filter-select" id="filter-role">
+          <option value="">Tất cả vai trò</option>
+          <option value="HLV_TRUONG">Huấn luyện viên trưởng</option>
+          <option value="HLV_THU_MON">HLV thủ môn</option>
+          <option value="TRO_LY_HLV">Trợ lý HLV</option>
+          <option value="BAC_SI">Bác sĩ / Y tế</option>
+          <option value="QUAN_LY">Quản lý đội</option>
+        </select>
+        <select class="filter-select" id="filter-status">
+          <option value="">Tất cả trạng thái</option>
+          <option value="active">Active</option>
+          <option value="inactive">Inactive</option>
+        </select>
+        <div class="toolbar-spacer"></div>
+        <button class="btn-add" id="btn-add-staff">
+          <i class="ti ti-plus"></i><span>Thêm thành viên</span>
+        </button>
+      </div>
+
+      <!-- COUNT -->
+      <div class="count-bar">
+        <span>Hiển thị</span>
+        <span class="count-num" id="count-shown">0</span>
+        <span class="count-sep">/</span>
+        <span class="count-num" id="count-total">0</span>
+        <span>thành viên</span>
+      </div>
+
+      <!-- TABLE -->
+      <div class="table-panel">
+        <div class="table-wrap">
+          <table class="staff-table" id="staff-table">
+            <thead>
+              <tr>
+                <th class="col-avatar">Ảnh</th>
+                <th class="col-name sortable" data-col="name">Họ tên <i class="ti ti-selector sort-icon"></i></th>
+                <th class="col-role">Vai trò</th>
+                <th class="col-nat">Quốc tịch</th>
+                <th class="col-joined sortable" data-col="joined">Năm gia nhập <i class="ti ti-selector sort-icon"></i></th>
+                <th class="col-phone">Số điện thoại</th>
+                <th class="col-status">Trạng thái</th>
+                <th class="col-action">Hành động</th>
+              </tr>
+            </thead>
+            <tbody id="staff-tbody"></tbody>
+          </table>
+        </div>
+
+        <!-- PAGINATION BAR -->
+        <div class="pagination-bar" id="pagination-bar">
+          <span class="pagination-info"></span>
+          <div class="pagination-controls"></div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- ── FORM MODAL (Thêm / Sửa) ── -->
+<div class="modal-overlay" id="form-modal">
+  <div class="staff-modal-card">
+    <div class="modal-header">
+      <div class="modal-title" id="form-modal-title">Thêm <span>Thành Viên</span></div>
+      <button class="modal-close" id="form-modal-close"><i class="ti ti-x"></i></button>
+    </div>
+
+    <div class="staff-modal-layout">
+
+      <!-- LEFT: ảnh đại diện + trạng thái -->
+      <div class="staff-modal-left">
+        <div class="cover-upload-area" id="avatar-drop-zone">
+          <div class="cover-preview-wrap" id="avatar-preview-wrap">
+            <img id="avatar-preview-img" src="" alt="Preview" style="display:none" />
+            <div class="cover-placeholder" id="avatar-placeholder">
+              <i class="ti ti-photo-up"></i>
+              <span>Kéo thả hoặc<br/>click để chọn ảnh</span>
+              <small>JPG, PNG, WebP · Tối đa 500KB</small>
+            </div>
+          </div>
+          <input type="file" id="avatar-file-input" accept="image/*" style="display:none" />
+          <div class="cover-actions" id="avatar-actions" style="display:none">
+            <button class="cover-action-btn" id="avatar-change-btn" type="button">
+              <i class="ti ti-refresh"></i> Đổi ảnh
+            </button>
+            <button class="cover-action-btn danger" id="avatar-remove-btn" type="button">
+              <i class="ti ti-trash"></i> Xóa
+            </button>
+          </div>
+        </div>
+
+        <div class="avatar-size-info" id="avatar-size-info"></div>
+
+        <div class="form-group" style="margin-top:12px">
+          <label class="form-label">URL ảnh ngoài (tuỳ chọn)</label>
+          <input type="text" class="form-input" id="f-img" placeholder="https://..." />
+          <div class="form-hint">Dùng URL nếu không upload file</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Trạng thái</label>
+          <div class="status-toggle-wrap">
+            <button class="status-toggle-btn active" id="status-active-btn" data-val="active" type="button">
+              <i class="ti ti-circle-check"></i> Active
+            </button>
+            <button class="status-toggle-btn" id="status-inactive-btn" data-val="inactive" type="button">
+              <i class="ti ti-circle-x"></i> Inactive
+            </button>
+          </div>
+          <input type="hidden" id="f-status" value="active" />
+        </div>
+      </div>
+
+      <!-- RIGHT: thông tin -->
+      <div class="staff-modal-right">
+        <div class="form-section-title">Thông tin cơ bản</div>
+
+        <div class="form-row-2">
+          <div class="form-group">
+            <label class="form-label">Họ và tên *</label>
+            <input type="text" class="form-input" id="f-name" placeholder="Nguyễn Văn A" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Vai trò *</label>
+            <select class="form-select" id="f-role">
+              <option value="">Chọn vai trò</option>
+              <option value="HLV_TRUONG">Huấn luyện viên trưởng</option>
+              <option value="HLV_THU_MON">HLV thủ môn</option>
+              <option value="TRO_LY_HLV">Trợ lý HLV</option>
+              <option value="BAC_SI">Bác sĩ / Y tế</option>
+              <option value="QUAN_LY">Quản lý đội</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row-2">
+          <div class="form-group">
+            <label class="form-label">Quốc tịch</label>
+            <input type="text" class="form-input" id="f-nat" placeholder="Việt Nam" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Ngày sinh</label>
+            <input type="text" class="form-input" id="f-birth" placeholder="dd/mm/yyyy" />
+          </div>
+        </div>
+
+        <div class="form-row-2">
+          <div class="form-group">
+            <label class="form-label">Năm gia nhập</label>
+            <input type="number" class="form-input" id="f-joined" placeholder="2024" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Số điện thoại</label>
+            <input type="text" class="form-input" id="f-phone" placeholder="0912 345 678" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-input" id="f-email" placeholder="example@bitfc.vn" />
+        </div>
+
+        <div class="form-section-title" style="margin-top:6px">Giới thiệu</div>
+        <div class="form-group">
+          <label class="form-label">Bio</label>
+          <textarea class="form-textarea" id="f-bio" rows="4" placeholder="Giới thiệu ngắn về thành viên..."></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn-cancel" id="form-cancel-btn">Hủy</button>
+      <button class="btn-save" id="form-save-btn">
+        <i class="ti ti-device-floppy"></i> Lưu thành viên
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ── DELETE MODAL ── -->
+<div class="modal-overlay" id="delete-modal">
+  <div class="delete-card">
+    <div class="delete-body">
+      <div class="delete-icon-wrap"><i class="ti ti-trash"></i></div>
+      <div class="delete-title">Xác nhận xóa</div>
+      <div class="delete-msg">
+        Bạn có chắc muốn xóa thành viên<br>
+        <span class="delete-name" id="delete-staff-name">—</span>?<br>
+        Hành động này không thể hoàn tác.
+      </div>
+    </div>
+    <div class="delete-footer">
+      <button class="btn-cancel" id="delete-cancel-btn">Hủy</button>
+      <button class="btn-del-confirm" id="delete-confirm-btn">Xóa ngay</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast-wrap" id="toast-wrap"></div>
+
+<script type="module" src="../../js/Management/staff-panel.js"></script>
+</body>
+</html>

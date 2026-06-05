@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BIT FC — Cầu Thủ</title>
+  <link rel="icon" href="../../assessts/logoBit.png" />
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../css/Management/players-panel.css" />
+  <!-- 🔒 Private Route Guard -->
+  <script type="module" src="../../js/Management/auth-guard.js"></script>
+</head>
+<body>
+<div class="dashboard">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <a href="/mu-website/index.html" class="sidebar-logo" style="text-decoration: none; color: inherit;">
+      <div class="logo-crest">
+        <img src="../../assessts/logoBit.png" alt="NONE BIT FC" />
+      </div>
+      <div class="logo-text">
+        <div class="logo-name">BIT FC</div>
+        <div class="logo-sub">The Pride of Banking IT</div>
+      </div>
+    </a>
+    <div class="nav-section-label">Chính</div>
+    <div class="nav-item" data-page="dashboard" onclick="window.location.href='dashboard.html'"><i class="ti ti-layout-dashboard"></i>Tổng quan</div>
+    <div class="nav-item active" data-page="players" onclick="window.location.href='players-panel.html'"><i class="ti ti-users"></i>Cầu thủ</div>
+    <div class="nav-item" data-page="staff" onclick="window.location.href='staff-panel.html'"><i class="ti ti-user-circle"></i>Ban huấn luyện</div>
+    <div class="nav-item" data-page="matches" onclick="window.location.href='match-panel.html'"><i class="ti ti-calendar"></i>Lịch thi đấu</div>
+    <div class="nav-section-label">Truyền thông</div>
+    <div class="nav-item" data-page="highlights" onclick="window.location.href='gallery-panel.html'"><i class="ti ti-player-play"></i>Highlights</div>
+    <div class="nav-item" data-page="news" onclick="window.location.href='new-panel.html'"><i class="ti ti-news"></i>Tin tức &amp; Báo</div>
+    <div class="nav-item" data-page="photos" onclick="window.location.href='photo-panel.html'"><i class="ti ti-photo"></i>Thư viện ảnh</div>
+    <div class="nav-section-label">Khác</div>
+    <div class="nav-item" data-page="trophies"><i class="ti ti-trophy"></i>Thành tích</div>
+    <div class="nav-item" data-page="settings"><i class="ti ti-settings"></i>Cài đặt</div>
+    <div class="sidebar-bottom">
+      <div class="season-badge">Mùa 2024 – 25</div>
+    </div>
+  </aside>
+
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <!-- MAIN -->
+  <div class="main">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+        <div>
+          <div class="greet">Xin chào, Admin</div>
+          <div class="page-title">Quản lý <span>Cầu Thủ</span></div>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <div class="date-chip"><i class="ti ti-calendar"></i><span id="current-date"></span></div>
+        <button class="icon-btn" aria-label="Thông báo"><i class="ti ti-bell"></i><span class="dot"></span></button>
+        <button class="avatar-btn" aria-label="Tài khoản">AD</button>
+      </div>
+    </header>
+
+    <main class="content">
+      <!-- TOOLBAR -->
+      <div class="players-toolbar">
+        <div class="search-wrap">
+          <i class="ti ti-search"></i>
+          <input type="text" class="search-input" id="search-input" placeholder="Tìm cầu thủ..." />
+        </div>
+        <select class="filter-select" id="filter-pos">
+          <option value="">Tất cả vị trí</option>
+          <option value="GK">Thủ Môn (GK)</option>
+          <option value="DEF">Hậu Vệ (DEF)</option>
+          <option value="MID">Tiền Vệ (MID)</option>
+          <option value="FWD">Tiền Đạo (FWD)</option>
+        </select>
+        <select class="filter-select" id="filter-status">
+          <option value="">Tất cả trạng thái</option>
+          <option value="active">Active</option>
+          <option value="injured">Injured</option>
+          <option value="suspend">Suspend</option>
+        </select>
+        <div class="toolbar-spacer"></div>
+        <button class="btn-add" id="btn-add-player">
+          <i class="ti ti-plus"></i><span>Thêm cầu thủ</span>
+        </button>
+      </div>
+
+      <!-- COUNT -->
+      <div class="count-bar">
+        <span>Hiển thị</span>
+        <span class="count-num" id="count-shown">0</span>
+        <span class="count-sep">/</span>
+        <span class="count-num" id="count-total">0</span>
+        <span>cầu thủ</span>
+      </div>
+
+      <!-- TABLE -->
+      <div class="table-panel">
+        <div class="table-wrap">
+          <table class="players-table" id="players-table">
+            <thead>
+              <tr>
+                <th class="col-num sortable" data-col="number">#<i class="ti ti-selector sort-icon"></i></th>
+                <th class="col-player">Cầu Thủ</th>
+                <th class="col-pos">Vị trí</th>
+                <th class="col-nat">Quốc tịch</th>
+                <th class="col-stats sortable" data-col="goals">⚽<i class="ti ti-selector sort-icon"></i></th>
+                <th class="col-stats sortable" data-col="assists">🅰<i class="ti ti-selector sort-icon"></i></th>
+                <th class="col-stats sortable" data-col="appearances">🎽<i class="ti ti-selector sort-icon"></i></th>
+                <th class="col-status">Trạng thái</th>
+                <th class="col-action">Hành động</th>
+              </tr>
+            </thead>
+            <tbody id="players-tbody"></tbody>
+          </table>
+        </div>
+
+        <!-- PAGINATION BAR -->
+        <div class="pagination-bar" id="pagination-bar">
+          <span class="pagination-info"></span>
+          <div class="pagination-controls"></div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- ── FORM MODAL (Thêm / Sửa) — 2-column layout ── -->
+<div class="modal-overlay" id="form-modal">
+  <div class="modal-card">
+    <div class="modal-header">
+      <div class="modal-title" id="form-modal-title">Thêm <span>Cầu Thủ</span></div>
+      <button class="modal-close" id="form-modal-close"><i class="ti ti-x"></i></button>
+    </div>
+
+    <!-- BODY: 2-col layout (left: avatar, right: 2-col form inputs) -->
+    <div class="players-modal-layout">
+      
+      <!-- ── CỘT TRÁI (ẢNH ĐẠI DIỆN) ── -->
+      <div class="players-modal-left">
+        <div class="form-section-title">Ảnh đại diện</div>
+        <div class="form-group full" style="margin-top: 10px;">
+          <div class="cover-upload-area" id="avatar-drop-zone">
+            <div class="cover-preview-wrap" id="avatar-preview-wrap">
+              <img id="avatar-preview-img" src="" alt="Preview" style="display:none" />
+              <div class="cover-placeholder" id="avatar-placeholder">
+                <i class="ti ti-photo-up"></i>
+                <span>Kéo thả hoặc<br/>click để chọn ảnh</span>
+                <small>JPG, PNG, WebP · Max 500KB</small>
+              </div>
+            </div>
+            <input type="file" id="avatar-file-input" accept="image/*" style="display:none" />
+            <div class="cover-actions" id="avatar-actions" style="display:none">
+              <button class="cover-action-btn" id="avatar-change-btn" type="button">
+                <i class="ti ti-refresh"></i> Đổi ảnh
+              </button>
+              <button class="cover-action-btn danger" id="avatar-remove-btn" type="button">
+                <i class="ti ti-trash"></i> Xóa
+              </button>
+            </div>
+          </div>
+          <div class="avatar-size-info" id="avatar-size-info"></div>
+
+          <div class="form-group" style="margin-top:15px">
+            <label class="form-label">URL ảnh ngoài (tuỳ chọn)</label>
+            <input type="text" class="form-input" id="f-img" placeholder="https://..." />
+            <div class="form-hint">Nhập URL nếu không tải file</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── CỘT PHẢI (THÔNG TIN) ── -->
+      <div class="players-modal-right">
+        
+        <!-- THÔNG TIN CƠ BẢN -->
+        <div class="form-section-title">Thông tin cơ bản</div>
+
+        <div class="form-group">
+          <label class="form-label">Họ và tên *</label>
+          <input type="text" class="form-input" id="f-name" placeholder="Nguyễn Văn A" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Số áo *</label>
+          <input type="number" class="form-input" id="f-number" placeholder="10" min="1" max="99" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Vị trí *</label>
+          <select class="form-select" id="f-pos">
+            <option value="">Chọn vị trí</option>
+            <option value="GK">Thủ Môn (GK)</option>
+            <option value="DEF">Hậu Vệ (DEF)</option>
+            <option value="MID">Tiền Vệ (MID)</option>
+            <option value="FWD">Tiền Đạo (FWD)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Quốc tịch</label>
+          <input type="text" class="form-input" id="f-nat" placeholder="Việt Nam" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Ngày sinh</label>
+          <input type="text" class="form-input" id="f-birth" placeholder="dd/mm/yyyy" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Năm gia nhập</label>
+          <input type="number" class="form-input" id="f-joined" placeholder="2024" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Chiều cao</label>
+          <input type="text" class="form-input" id="f-height" placeholder="1.80 m" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Cân nặng</label>
+          <input type="text" class="form-input" id="f-weight" placeholder="75 kg" />
+        </div>
+
+        <div class="form-group full">
+          <label class="form-label">Trạng thái</label>
+          <select class="form-select" id="f-status">
+            <option value="active">Active</option>
+            <option value="injured">Injured</option>
+            <option value="suspend">Suspend</option>
+          </select>
+        </div>
+
+        <!-- THỐNG KÊ MÙA NÀY -->
+        <div class="form-section-title">Thống kê mùa này</div>
+
+        <div class="form-group">
+          <label class="form-label">Số trận</label>
+          <input type="number" class="form-input" id="f-apps" placeholder="0" min="0" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Bàn thắng</label>
+          <input type="number" class="form-input" id="f-goals" placeholder="0" min="0" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Kiến tạo</label>
+          <input type="number" class="form-input" id="f-assists" placeholder="0" min="0" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Thẻ vàng / Đỏ</label>
+          <input type="text" class="form-input" id="f-cards" placeholder="2 / 0" />
+        </div>
+
+      </div><!-- /players-modal-right -->
+    </div><!-- /players-modal-layout -->
+
+    <div class="modal-footer">
+      <button class="btn-cancel" id="form-cancel-btn">Hủy</button>
+      <button class="btn-save" id="form-save-btn">
+        <i class="ti ti-device-floppy"></i> Lưu cầu thủ
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ── DELETE MODAL ── -->
+<div class="modal-overlay" id="delete-modal">
+  <div class="delete-card">
+    <div class="delete-body">
+      <div class="delete-icon-wrap"><i class="ti ti-trash"></i></div>
+      <div class="delete-title">Xác nhận xóa</div>
+      <div class="delete-msg">
+        Bạn có chắc muốn xóa cầu thủ<br>
+        <span class="delete-name" id="delete-player-name">—</span>?<br>
+        Hành động này không thể hoàn tác.
+      </div>
+    </div>
+    <div class="delete-footer">
+      <button class="btn-cancel" id="delete-cancel-btn">Hủy</button>
+      <button class="btn-del-confirm" id="delete-confirm-btn">Xóa ngay</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast-wrap" id="toast-wrap"></div>
+
+<script type="module" src="../../js/Management/players-panel.js"></script>
+</body>
+</html>
