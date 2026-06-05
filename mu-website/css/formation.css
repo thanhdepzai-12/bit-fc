@@ -1,0 +1,378 @@
+/* ═══════════════════════════════════════════════════
+   FORMATION PITCH CSS
+═══════════════════════════════════════════════════ */
+
+.formation-section {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto 3rem;
+  padding: 0 1rem;
+}
+
+.formation-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+.formation-header h2 {
+  font-family: var(--font-display);
+  font-size: 24px;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 5px;
+}
+.formation-header p {
+  font-family: var(--font-condensed);
+  font-size: 14px;
+  color: var(--gray-mid);
+}
+
+.pitch-container {
+  position: relative;
+  width: 100%;
+  margin-top: 80px; /* Tăng khoảng trống ở trên để ST tràn lên (kích thước thẻ to nên cần nhiều margin hơn) */
+  margin-bottom: 40px; /* Tăng khoảng trống ở dưới cho GK tràn xuống */
+  border-radius: 8px;
+  /* Removed overflow, border, and box-shadow to allow cards to overflow freely */
+  z-index: 1;
+}
+
+.pitch-bg {
+  width: 100%;
+  height: auto;
+  display: block;
+  pointer-events: none;
+}
+
+/* The dark overlay to make pitch look better if needed */
+.pitch-container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.3));
+  pointer-events: none;
+  z-index: 1;
+}
+
+.slot {
+  position: absolute;
+  width: 14%; /* Giảm từ 16% xuống 14% */
+  aspect-ratio: 2/3;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slot:hover {
+  transform: translate(-50%, -55%) scale(1.15); /* Phóng to hơn một chút */
+  filter: drop-shadow(0 15px 25px rgba(251, 225, 34, 0.6));
+  z-index: 50; /* Luôn nổi lên trên cùng */
+}
+
+/* --- SUBS CONTAINER --- */
+.subs-container {
+  margin-top: 3rem;
+  padding: 0 10px;
+}
+.subs-header {
+  text-align: center;
+  margin-bottom: 15px;
+}
+.subs-header h3 {
+  font-family: var(--font-display);
+  font-size: 16px;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.subs-grid {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap; /* Cho phép rớt dòng */
+}
+
+.sub-slot {
+  position: relative;
+  width: 12%; /* Nhỏ hơn slot trên sân */
+  min-width: 60px;
+  aspect-ratio: 2/3;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sub-slot:hover {
+  transform: translateY(-8px) scale(1.15);
+  filter: drop-shadow(0 15px 25px rgba(251, 225, 34, 0.6));
+  z-index: 50;
+}
+
+/* Sơ đồ 1-2-3-1 (7 người) */
+.slot[data-pos="ST"]  { top: 2%; left: 50%; } /* Tràn lên trên */
+.slot[data-pos="LM"]  { top: 38%; left: 22%; }
+.slot[data-pos="CM"]  { top: 43%; left: 50%; }
+.slot[data-pos="RM"]  { top: 38%; left: 78%; }
+.slot[data-pos="LCB"] { top: 68%; left: 32%; }
+.slot[data-pos="RCB"] { top: 68%; left: 68%; }
+.slot[data-pos="GK"]  { top: 98%; left: 50%; } /* Tràn xuống dưới */
+
+/* --- EMPTY SLOT --- */
+.slot-empty {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  border: 2px dashed rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(2px);
+  transition: var(--transition);
+}
+.slot:hover .slot-empty {
+  border-color: var(--gold);
+  color: var(--gold);
+  background: rgba(0, 0, 0, 0.7);
+}
+.slot-empty svg {
+  width: 24px;
+  height: 24px;
+  margin-bottom: 5px;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
+.slot-empty .pos-label {
+  font-family: var(--font-display);
+  font-size: clamp(10px, 1.5vw, 14px);
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* --- FILLED CARD --- */
+.slot-filled {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(145deg, #1f0508, #0a0000);
+  border: 1px solid rgba(251, 225, 34, 0.6);
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.8), inset 0 0 10px rgba(251, 225, 34, 0.1);
+}
+.card-top {
+  position: relative;
+  height: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  background: radial-gradient(circle at top, rgba(218,41,28,0.3) 0%, transparent 70%);
+}
+.card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  border-bottom: 1px solid rgba(251, 225, 34, 0.2);
+}
+.card-ovr {
+  position: absolute;
+  top: 4px; left: 4px;
+  font-family: var(--font-display);
+  font-size: clamp(14px, 3vw, 20px);
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+  text-shadow: 1px 1px 2px #000;
+}
+.card-pos-label {
+  position: absolute;
+  top: clamp(20px, 5.5vw, 26px); left: 4px;
+  font-family: var(--font-condensed);
+  font-size: clamp(8px, 1.5vw, 11px);
+  color: var(--white);
+  text-shadow: 1px 1px 2px #000;
+  text-transform: uppercase;
+}
+.card-bottom {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.6);
+  padding: 0 2px;
+}
+.card-name {
+  font-family: var(--font-condensed);
+  font-size: clamp(9px, 2vw, 13px);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--white);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+}
+.slot-remove {
+  position: absolute;
+  top: -8px; right: -8px;
+  width: 22px; height: 22px;
+  background: var(--red-primary);
+  color: white;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity 0.2s;
+  z-index: 10;
+  border: 1px solid rgba(255,255,255,0.5);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+}
+.slot-remove svg {
+  width: 12px; height: 12px; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+}
+.slot:hover .slot-remove {
+  opacity: 1;
+}
+.slot-remove:hover {
+  background: var(--red-mid);
+  transform: scale(1.1);
+}
+
+/* --- MODAL POPUP --- */
+.formation-modal-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.85);
+  z-index: 9999; display: flex; align-items: center; justify-content: center;
+  opacity: 0; visibility: hidden; transition: 0.3s;
+  backdrop-filter: blur(5px);
+  padding: 1rem;
+}
+.formation-modal-overlay.open {
+  opacity: 1; visibility: visible;
+}
+.formation-modal {
+  background: #120104; border: 1px solid rgba(218, 41, 28, 0.4);
+  border-radius: 8px; width: 100%; max-width: 450px; height: 80vh; max-height: 600px;
+  display: flex; flex-direction: column;
+  box-shadow: 0 15px 50px rgba(0,0,0,0.8), inset 0 0 30px rgba(218, 41, 28, 0.1);
+  transform: translateY(20px); transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.formation-modal-overlay.open .formation-modal {
+  transform: translateY(0);
+}
+
+.formation-modal-header {
+  padding: 16px 20px; border-bottom: 1px solid rgba(218, 41, 28, 0.2);
+  display: flex; justify-content: space-between; align-items: center;
+  flex-shrink: 0;
+}
+.formation-modal-title {
+  font-family: var(--font-display); font-size: 18px; color: var(--gold); text-transform: uppercase; letter-spacing: 1px;
+}
+.formation-modal-close {
+  background: transparent; color: var(--gray-mid); border: none; cursor: pointer; transition: 0.2s;
+  display: flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 50%;
+}
+.formation-modal-close:hover {
+  color: var(--white); background: rgba(255,255,255,0.1);
+}
+.formation-modal-close svg { width: 18px; height: 18px; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+.formation-modal-search {
+  padding: 12px 20px; border-bottom: 1px solid rgba(218, 41, 28, 0.1); flex-shrink: 0;
+  position: relative;
+}
+.formation-modal-search svg {
+  position: absolute; left: 30px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; stroke: var(--gray-mid); stroke-width: 2; fill: none;
+}
+.formation-modal-search input {
+  width: 100%; padding: 10px 10px 10px 34px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 4px; color: white; font-family: var(--font-condensed); font-size: 14px; outline: none; transition: 0.2s;
+}
+.formation-modal-search input:focus { border-color: var(--red-primary); background: rgba(255,255,255,0.08); }
+
+.formation-modal-body {
+  padding: 12px; overflow-y: auto; flex: 1;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.formation-modal-body::-webkit-scrollbar { width: 6px; }
+.formation-modal-body::-webkit-scrollbar-thumb { background: var(--red-mid); border-radius: 3px; }
+
+.formation-player-item {
+  display: flex; align-items: center; gap: 14px; padding: 12px;
+  background: rgba(255,255,255,0.03); border: 1px solid transparent; border-radius: 6px; cursor: pointer;
+  transition: 0.2s;
+}
+.formation-player-item:hover {
+  background: rgba(218, 41, 28, 0.08); border-color: rgba(218, 41, 28, 0.4); transform: translateX(4px);
+}
+.f-player-img {
+  width: 44px; height: 44px; border-radius: 50%; object-fit: cover; object-position: top; background: var(--red-deep); border: 1px solid rgba(255,255,255,0.2);
+}
+.f-player-info {
+  flex: 1; display: flex; flex-direction: column; justify-content: center;
+}
+.f-player-name {
+  font-family: var(--font-condensed); font-size: 15px; font-weight: 700; color: white; text-transform: uppercase; letter-spacing: 0.5px;
+}
+.f-player-pos {
+  font-family: var(--font-condensed); font-size: 12px; color: var(--gray-mid); text-transform: uppercase;
+}
+.f-player-num {
+  font-family: var(--font-display); font-size: 20px; color: var(--gold); font-weight: 700; width: 30px; text-align: center;
+}
+.f-empty-state {
+  text-align: center; padding: 40px 20px; font-family: var(--font-condensed); color: var(--gray-mid); font-size: 14px; text-transform: uppercase;
+}
+
+/* --- MOBILE RESPONSIVE --- */
+@media (max-width: 768px) {
+  .slot {
+    width: 16%; /* Giữ tỷ lệ phù hợp trên mobile */
+  }
+  .pitch-container {
+    margin-top: 50px;
+    margin-bottom: 40px;
+  }
+  .subs-grid {
+    gap: 8px;
+  }
+  .sub-slot {
+    width: 20%; /* To hơn một chút để dễ bấm, cho phép rớt 2 dòng */
+    min-width: 50px;
+  }
+  .subs-container {
+    margin-top: 2rem;
+  }
+  .card-name {
+    font-size: clamp(7px, 2vw, 10px);
+  }
+  .card-ovr {
+    font-size: clamp(10px, 3vw, 14px);
+  }
+  .card-pos-label {
+    top: clamp(14px, 5.5vw, 18px);
+    font-size: clamp(6px, 1.5vw, 8px);
+  }
+  .slot-empty svg {
+    width: 16px;
+    height: 16px;
+  }
+}
