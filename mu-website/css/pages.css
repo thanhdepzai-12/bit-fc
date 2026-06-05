@@ -252,11 +252,14 @@
   transition: all var(--transition);
   box-shadow: 0 4px 15px rgba(218, 41, 28, 0.5);
   z-index: 5;
+    border: 2px solid rgba(218, 41, 28, 0.708);
+
 }
 
 .gallery-item:hover .vid-badge {
   transform: translate(-50%, -50%) scale(1.15);
   box-shadow: 0 8px 25px rgba(218, 41, 28, 0.7);
+  background: rgba(218, 41, 28, 0.85);
 }
 
 /* Lightbox */
