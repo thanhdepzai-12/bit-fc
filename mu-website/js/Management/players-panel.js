@@ -181,7 +181,7 @@ window.openAdd = function() {
   avatarBase64 = null;                          
   document.getElementById('form-modal-title').innerHTML = 'Thêm <span>Cầu Thủ</span>';
   document.getElementById('form-save-btn').textContent = 'Thêm cầu thủ';
-  ['name','number','pos','nat','birth','joined','height','weight','img','apps','goals','assists','cards'].forEach(id => {
+  ['name','number','pos','nat','birth','joined','height','weight','img','apps','goals','assists','cards','bio'].forEach(id => {
     const el = document.getElementById('f-'+id);
     if (el) el.value = '';
   });
@@ -211,6 +211,7 @@ window.openEdit = function(id) {
   document.getElementById('f-goals').value   = p.goals || 0;
   document.getElementById('f-assists').value = p.assists || 0;
   document.getElementById('f-cards').value   = p.cards || '';
+  document.getElementById('f-bio').value     = p.bio || '';
   if (p.img) showAvatarPreview(p.img);
   else resetAvatarPreview();                    
   document.getElementById('form-modal').classList.add('open');
@@ -245,6 +246,7 @@ document.getElementById('form-save-btn').addEventListener('click', async () => {
     goals:   parseInt(document.getElementById('f-goals').value) || 0,
     assists: parseInt(document.getElementById('f-assists').value) || 0,
     cards:   document.getElementById('f-cards').value.trim(),
+    bio:     document.getElementById('f-bio').value.trim(),
   };
 
   // Khóa nút trong lúc upload

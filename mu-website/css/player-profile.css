@@ -67,6 +67,8 @@
   bottom: 1.5rem;
   left: 1.5rem;
   z-index: 5;
+  width: calc(100% - 90px);
+  max-width: 220px;
 }
 
 .profile-hero-text span {
@@ -79,11 +81,13 @@
 
 .profile-hero-text h2 {
   font-family: var(--font-display);
-  font-size: 2.2rem;
+  font-size: 1.9rem;
   color: var(--white);
-  line-height: 1;
+  line-height: 1.1;
   text-transform: uppercase;
   margin-top: 0.3rem;
+  word-wrap: break-word;
+  white-space: normal;
 }
 
 /* Hiệu ứng nảy và bóng đổ đỏ */
@@ -94,6 +98,60 @@
 }
 .profile-hero-card:hover img {
   transform: scale(1.08);
+}
+
+/* ---- TAG VÀ LOGO CHO HERO CARD ---- */
+.profile-pos-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 10;
+  background: rgba(13, 0, 0, 0.8);
+  border: 1px solid var(--red-primary);
+  border-radius: 2px;
+  padding: 0.3rem 0.6rem;
+  font-family: var(--font-condensed);
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgb(255, 126, 117);
+  backdrop-filter: blur(4px);
+  transition: all 0.3s ease;
+}
+.profile-hero-card:hover .profile-pos-badge {
+  background: var(--red-primary);
+  color: var(--white);
+  box-shadow: 0 0 12px rgba(218, 41, 28, 0.6);
+}
+
+.profile-club-logo {
+  position: absolute;
+  bottom: 1rem;
+  right: 1.5rem;
+  z-index: 10;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.profile-hero-card .profile-club-logo img {
+  width: 40px;
+  height: auto;
+  object-fit: contain;
+  filter: grayscale(100%) brightness(200%);
+  transition: all 0.3s ease;
+}
+.profile-club-logo:hover {
+  transform: scale(1.15);
+  background: rgba(218, 41, 28, 0.3);
+  border-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
 }
 
 /* Hiệu ứng Shimmer xẹt sáng */
@@ -154,7 +212,7 @@
   font-size: 0.85rem;
   letter-spacing: 0.4em;
   color: var(--red-primary); /* Một chút xanh dương nhạt để giống ảnh gốc, hoặc bạn đổi về var(--gray-mid) */
-  margin-top: 0.8rem;
+  margin-top: 1.8rem;
   margin-bottom: 2.5rem;
 }
 

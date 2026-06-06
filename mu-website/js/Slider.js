@@ -23,6 +23,16 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
+    function formatLongName(name) {
+      if (!name) return '';
+      const words = name.trim().split(/\s+/);
+      if (name.length > 15 && words.length >= 3) {
+        words[0] = '...';
+        return words.join(' ');
+      }
+      return name;
+    }
+
     // Lọc những cầu thủ active/injured/suspend (giống team-public)
     const activeResult = result.filter(p => p.status === "active" || p.status === "injured" || p.status === "suspend");
 
@@ -58,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
           <div class="player-3d-info">
             <div class="player-3d-info-inner">
-              <h3>${player.name}</h3>
+              <h3>${formatLongName(player.name)}</h3>
               <div class="player-3d-pos">
                 <div class="line"></div>
                 <p>${player.pos}</p>

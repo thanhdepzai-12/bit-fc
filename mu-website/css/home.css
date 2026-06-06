@@ -15,11 +15,7 @@
 }
 
 .hero-bg {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 100% 80% at 50% 30%, rgba(218, 41, 28, 0.4) 0%, transparent 65%),
-    radial-gradient(ellipse 60% 60% at 80% 80%, rgba(255, 255, 255, 0.04) 0%, transparent 60%);
+  display: none;
 }
 
 .hero-particles {
@@ -100,13 +96,14 @@
   letter-spacing: 0.45em;
   text-transform: uppercase;
   color: var(--gray-mid);
-  margin-top: 1.2rem;
+  margin-top: 2rem;
   opacity: 0;
   animation: fadeInUp 0.8s ease 0.8s forwards;
 }
 
 .hero-actions {
   margin-top: 2.5rem;
+  padding-bottom: 10em;
   display: flex;
   gap: 1rem;
   justify-content: center;
@@ -434,7 +431,7 @@ background:
 
 .player-3d-info h3 {
   font-family: var(--font-display);
-  font-size: clamp(1.4rem, 6vw, 2.2rem);
+  font-size: clamp(1.4rem, 6vw, 2rem);
   color: var(--white);
   line-height: 1.1;
   text-transform: uppercase;
@@ -608,7 +605,7 @@ background:
 
 .trophy-card {
   background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.06);
+  border: 1px solid rgba(108, 15, 15, 0.478);
   border-radius: 6px;
   padding: 2rem;
   display: flex;
@@ -632,9 +629,17 @@ background:
 .trophy-card:hover::before { transform: scaleY(1); }
 
 .trophy-card:hover {
-  border-color: rgba(218, 41, 28, 0.25);
-  background: rgba(139, 0, 0, 0.1);
+  border-color: rgba(218, 41, 28, 0.3);
+  background: rgba(139, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   transform: translateX(4px);
+}
+
+.trophy-card:hover .trophy-info p,
+.trophy-card:hover .trophy-info h3,
+.trophy-card:hover .trophy-year {
+  color: var(--white);
 }
 
 .trophy-year {
@@ -655,10 +660,11 @@ background:
 }
 
 .trophy-info p {
-  font-size: 0.82rem;
-  color: var(--gray-mid);
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.85);
   line-height: 1.6;
   font-weight: 300;
+  transition: color var(--transition);
 }
 
 /* ---- GALLERY PREVIEW ---- */
@@ -829,7 +835,7 @@ background:
 
 .news-card {
   background: rgba(255,255,255,0.02);
-  border: 1px solid rgba(255,255,255,0.06);
+  border: 1px solid rgba(108, 15, 15, 0.478);
   border-radius: 6px;
   overflow: hidden;
   transition: all var(--transition);
@@ -838,10 +844,33 @@ background:
   flex-direction: column;
 }
 
+.news-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px; height: 100%;
+  background: var(--red-primary);
+  transform: scaleY(0);
+  transition: transform var(--transition);
+  z-index: 2;
+}
+.news-card:hover::before { transform: scaleY(1); }
+
 .news-card:hover {
   border-color: rgba(218, 41, 28, 0.3);
+  background: rgba(139, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   transform: translateY(-4px);
   box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+}
+
+.news-card:hover h3,
+.news-card:hover p,
+.news-card:hover .news-tag,
+.news-card:hover .news-date,
+.news-card:hover .news-read-more {
+  color: var(--white);
 }
 
 .news-card-body {
@@ -867,13 +896,14 @@ background:
   transition: color var(--transition);
 }
 
-.news-card:hover h3 { color: var(--red-primary); }
+/* h3 hover color handled in the global hover block */
 
 .news-card p {
-  font-size: 0.85rem;
-  color: var(--gray-mid);
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.85);
   line-height: 1.7;
   font-weight: 300;
+  transition: color var(--transition);
 }
 
 .news-card-footer {
@@ -970,7 +1000,7 @@ background:
   font-size: 0.7rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--gray-mid);
+  color: var(--red-primary);
   margin-bottom: 0.5rem;
 }
 
@@ -1100,4 +1130,37 @@ background:
 @keyframes shineSweep {
   0% { transform: skewX(-20deg) translateX(-150%); }
   100% { transform: skewX(-20deg) translateX(150%); }
+}
+
+/* ============================================================
+   SEMI-TRANSPARENT BACKGROUNDS FOR VIDEO
+   ============================================================ */
+.hero,
+.mb-section,
+.about-section,
+.players-section,
+.trophies-section,
+.gallery-preview-section,
+.news-section,
+.contact-section {
+  background: transparent !important;
+}
+
+/* Remove dividers/borders between sections */
+.players-section::before,
+.trophies-section::before,
+.gallery-preview-section::before,
+.news-section::before,
+.contact-section::before {
+  display: none !important;
+}
+
+/* Remove text shadow globally */
+.about-section *,
+.players-section *,
+.trophies-section *,
+.gallery-preview-section *,
+.news-section *,
+.contact-section * {
+  text-shadow: none !important;
 }

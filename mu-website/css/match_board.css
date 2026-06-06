@@ -5,8 +5,8 @@
 :root {
   --mb-red:   #DA291C;
   --mb-dark:  #8B0000;
-  --mb-black: #0d0000;
-  --mb-card:  #1a0000;
+  --mb-black: rgba(13, 0, 0, 0.65);
+  --mb-card:  rgba(26, 0, 0, 0.65);
   --mb-gold:  #FBE122;
   --mb-dim:   #6b3333;
   --mb-text:  #e8d0d0;
@@ -67,6 +67,8 @@
     0 24px 80px rgba(0, 0, 0, 0.7),
     var(--shadow-glow);
   border: 1px solid rgba(218, 41, 28, 0.3);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 /* Match Bar header */
@@ -103,6 +105,7 @@
 
 /* Logo circles */
 .mb-logo-circle {
+  padding: 0.8rem;
   width: 78px; height: 78px; border-radius: 50%; overflow: hidden;
   border: 2px solid rgba(218,41,28,.45); background: var(--mb-card);
   display: flex; align-items: center; justify-content: center;
@@ -206,6 +209,8 @@
     0 24px 80px rgba(0, 0, 0, 0.7),
     var(--shadow-glow);
   border: 1px solid rgba(218, 41, 28, 0.3);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 .mb-rc:hover { border-color: rgba(218,41,28,.35); transform: translateY(-2px); }
 /* Gạch đỏ trên đầu */
@@ -225,7 +230,8 @@
 .mb-rc-comp { font-size: .6rem; letter-spacing: .15em; color: rgba(218,41,28,.75); margin-bottom: 9px; font-weight: 600; text-transform: uppercase; }
 .mb-rc-body { display: flex; align-items: center; gap: 6px; }
 .mb-rc-logo {
-  width: 34px; height: 34px; border-radius: 50%; background: var(--mb-black);
+  padding: 0.5rem;
+  width: 40px; height: 40px; border-radius: 50%; background: var(--mb-black);
   border: 1px solid rgba(218,41,28,.25);
   display: flex; align-items: center; justify-content: center; flex-shrink: 0; overflow: hidden;
 }
@@ -265,6 +271,8 @@
   background: var(--mb-card); border-radius: 0 0 8px 8px;
   border: 1px solid rgba(218,41,28,.22); border-top: none;
   overflow: hidden; box-shadow: 0 8px 40px rgba(0,0,0,.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 .mb-std-bar {
   background: linear-gradient(90deg, #DA291C, #8B0000);

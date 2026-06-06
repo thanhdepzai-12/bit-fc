@@ -33,14 +33,26 @@ function renderDetail(s) {
   const imgUrl = s.imgUrl || defaultImg;
   const isDefault = !s.imgUrl;
 
-  const teamWatermark = "MUFC";
+  const teamWatermark = "NONE BIT FC";
   const roleLabel = roleLabels[s.role] || s.roleLabel || s.role || 'Ban Huấn Luyện';
+
+  let badgeText = '';
+  if (roleLabel) {
+    badgeText = roleLabel.split(/[\s/-]+/)
+      .filter(w => w.length > 0)
+      .map(w => w[0].toUpperCase())
+      .join('');
+  }
 
   detail.innerHTML = `
     <div class="profile-top-grid">
       
       <div class="profile-hero-card">
         <img src="${imgUrl}" alt="${s.name}" loading="lazy" ${isDefault ? 'style="width:45%;opacity:0.15;margin:auto;"' : ''} onerror="this.src='${defaultImg}';" />
+        ${badgeText ? `<div class="profile-pos-badge">${badgeText}</div>` : ''}
+        <div class="profile-club-logo">
+          <img src="../assessts/logoBit.png" alt="BIT FC" />
+        </div>
         <div class="profile-hero-overlay"></div>
         <div class="profile-hero-text">
           <span>${teamWatermark}</span>
@@ -51,7 +63,7 @@ function renderDetail(s) {
       <div class="profile-info-section">
         <div class="profile-badge">${roleLabel}</div>
         <h1 class="profile-name">${s.name}</h1>
-        <div class="profile-subtitle">THE PRIDE OF MANCHESTER</div>
+        <div class="profile-subtitle">Not Old New Energy BIT FC</div>
 
         <div class="profile-basic-grid">
           <div class="basic-card">

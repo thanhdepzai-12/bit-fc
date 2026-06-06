@@ -961,7 +961,7 @@ table.staff-table tbody tr:hover .staff-avatar-wrap {
 .cover-preview-wrap {
   position: relative;
   width: 100%;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 4/5;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -975,6 +975,7 @@ table.staff-table tbody tr:hover .staff-avatar-wrap {
   object-fit: cover;
   display: block;
   transition: transform 0.3s ease;
+  object-position: center top;
 }
 .cover-preview-wrap:hover img {
   transform: scale(1.03);

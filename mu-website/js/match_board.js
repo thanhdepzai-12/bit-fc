@@ -84,7 +84,7 @@ import { getAllPlayers } from "../controllers/PlayerController.js";
 
   // Render HTML SVG fallback cho Logo
   function getLogoHtml(logoUrl, shortName, isHome) {
-    if (logoUrl) return `<img src="${logoUrl}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" />`;
+    if (logoUrl) return `<img src="${logoUrl}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;transform:scale(1.2);" />`;
     const bg = isHome ? "#DA291C" : "#1a1a2e";
     return `
       <svg viewBox="0 0 62 62" xmlns="http://www.w3.org/2000/svg">
@@ -251,8 +251,8 @@ import { getAllPlayers } from "../controllers/PlayerController.js";
       card.style.flex = `0 0 calc(${100 / p}% - ${(p - 1) * 12 / p}px)`;
       card.style.animationDelay = (idx * .06) + 's';
       
-      const homeLogo = m.homeLogo ? `<img src="${m.homeLogo}" style="width:100%;height:100%;object-fit:cover" />` : `<svg viewBox="0 0 28 28"><circle cx="14" cy="14" r="13" fill="#DA291C"/><text x="14" y="18" font-family="Oswald" font-size="7" font-weight="700" fill="#fff" text-anchor="middle">${m.homeShort||''}</text></svg>`;
-      const awayLogo = m.awayLogo ? `<img src="${m.awayLogo}" style="width:100%;height:100%;object-fit:cover" />` : `<svg viewBox="0 0 28 28"><circle cx="14" cy="14" r="13" fill="#1a1a2e"/><text x="14" y="18" font-family="Oswald" font-size="7" font-weight="700" fill="#fff" text-anchor="middle">${m.awayShort||''}</text></svg>`;
+      const homeLogo = m.homeLogo ? `<img src="${m.homeLogo}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;transform:scale(1.25);" />` : `<svg viewBox="0 0 28 28"><circle cx="14" cy="14" r="13" fill="#DA291C"/><text x="14" y="18" font-family="Oswald" font-size="7" font-weight="700" fill="#fff" text-anchor="middle">${m.homeShort||''}</text></svg>`;
+      const awayLogo = m.awayLogo ? `<img src="${m.awayLogo}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;transform:scale(1.25);" />` : `<svg viewBox="0 0 28 28"><circle cx="14" cy="14" r="13" fill="#1a1a2e"/><text x="14" y="18" font-family="Oswald" font-size="7" font-weight="700" fill="#fff" text-anchor="middle">${m.awayShort||''}</text></svg>`;
       
       const dStr = (m.date||"").split('-').reverse().join('/');
       let resText = "Chưa rõ", resClass = "";

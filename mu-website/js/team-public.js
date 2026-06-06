@@ -83,12 +83,31 @@ function renderTeam(players, staffs) {
   let html = '';
   const defaultImg = '../assessts/logoBit.png';
 
+  function formatLongName(name) {
+    if (!name) return '';
+    const words = name.trim().split(/\s+/);
+    if (name.length > 15 && words.length >= 3) {
+      words[0] = '...';
+      return words.join(' ');
+    }
+    return name;
+  }
+
   // 1. Render danh sách STAFF từ Firebase
   staffs.forEach((s) => {
     const imgUrl = s.imgUrl || defaultImg;
     const isDefault = !s.imgUrl;
     const roleLabel = roleLabels[s.role] || s.roleLabel || s.role || 'Ban Huấn Luyện';
     const abbr = roleAbbr[s.role] || 'ST';
+
+    // Tạo chữ cái đầu cho tag vị trí của staff
+    let badgeText = '';
+    if (roleLabel) {
+      badgeText = roleLabel.split(/[\s/-]+/)
+        .filter(w => w.length > 0)
+        .map(w => w[0].toUpperCase())
+        .join('');
+    }
 
     html += `
       <a href="staff-detail.html?id=${s.id}" class="team-card staff-card fade-in" data-category="staff" data-role="${s.role || ''}">
@@ -98,9 +117,10 @@ function renderTeam(players, staffs) {
                onerror="this.src='${defaultImg}';this.style.cssText='width:45%;opacity:0.15;margin:auto;'" />
         </div>
         <div class="team-card-number">${abbr}</div>
+        ${badgeText ? `<div class="team-card-badge">${badgeText}</div>` : ''}
         <div class="team-card-body">
           <div class="team-card-pos">${roleLabel}</div>
-          <div class="team-card-name">${s.name}</div>
+          <div class="team-card-name">${formatLongName(s.name)}</div>
         </div>
       </a>
     `;
@@ -118,10 +138,10 @@ function renderTeam(players, staffs) {
                onerror="this.src='${defaultImg}';this.style.cssText='width:45%;opacity:0.15;margin:auto;'" />
         </div>
         <div class="team-card-number">${p.number || ''}</div>
-        ${p.pos === 'GK' ? `<div class="team-card-badge">GK</div>` : ''}
+        ${p.pos ? `<div class="team-card-badge">${p.pos.toUpperCase()}</div>` : ''}
         <div class="team-card-body">
           <div class="team-card-pos">${p.posLabel || p.pos}</div>
-          <div class="team-card-name">${p.name}</div>
+          <div class="team-card-name">${formatLongName(p.name)}</div>
         </div>
       </a>
     `;
