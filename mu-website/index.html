@@ -23,7 +23,7 @@
   </video>
   <div id="bg-overlay"></div>
 
-  <button id="mute-btn" aria-label="Bật/Tắt âm thanh">🔇</button>
+  
 
 
   <!-- PRELOADER -->
@@ -43,26 +43,42 @@
       <span>NONE BIT FC</span>
     </a>
     <ul class="nav-links">
-      <li><a href="index.html" class="active">Trang chủ</a></li>
-      <li><a href="pages/team.html">Đội Hình</a></li>
-      <li><a href="pages/gallery.html">Thư Viện</a></li>
-      <li><a href="pages/history.html">Thành Tích</a></li>
-      <li><a href="pages/news.html">Tin Tức</a></li>
-      <li><a href="pages/Management/dashboard.html">Quản Lý</a></li>
-      <li><a href="#contact">Liên Hệ</a></li>
+      <li><a href="index.html" class="active" data-i18n="nav_home">Trang chủ</a></li>
+      <li><a href="pages/team.html" data-i18n="nav_team">Đội Hình</a></li>
+      <li><a href="pages/gallery.html" data-i18n="nav_gallery">Thư Viện</a></li>
+      <li><a href="pages/history.html" data-i18n="nav_history">Thành Tích</a></li>
+      <li><a href="pages/news.html" data-i18n="nav_news">Tin Tức</a></li>
+      <li><a href="pages/Management/dashboard.html" data-i18n="nav_management">Quản Lý</a></li>
+      <li><a href="#contact" data-i18n="nav_contact">Liên Hệ</a></li>
+      <li class="lang-menu">
+        <button class="lang-btn active" data-lang="vi" aria-label="Tiếng Việt">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/2/21/Flag_of_Vietnam.svg" alt="VI" />
+        </button>
+        <button class="lang-btn" data-lang="en" aria-label="English">
+          <img src="https://upload.wikimedia.org/wikipedia/en/a/ae/Flag_of_the_United_Kingdom.svg" alt="EN" />
+        </button>
+      </li>
     </ul>
     <div class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></div>
   </nav>
 
   <!-- MOBILE NAV -->
   <div class="mobile-nav">
-    <a href="index.html">Trang chủ</a>
-    <a href="pages/team.html">Đội Hình</a>
-    <a href="pages/gallery.html">Thư Viện</a>
-    <a href="pages/history.html">Thành Tích</a>
-    <a href="pages/news.html">Tin Tức</a>
-    <a href="pages/Management/dashboard.html">Quản Lý</a>
-    <a href="#contact">Liên Hệ</a>
+    <a href="index.html" data-i18n="nav_home">Trang chủ</a>
+    <a href="pages/team.html" data-i18n="nav_team">Đội Hình</a>
+    <a href="pages/gallery.html" data-i18n="nav_gallery">Thư Viện</a>
+    <a href="pages/history.html" data-i18n="nav_history">Thành Tích</a>
+    <a href="pages/news.html" data-i18n="nav_news">Tin Tức</a>
+    <a href="pages/Management/dashboard.html" data-i18n="nav_management">Quản Lý</a>
+    <a href="#contact" data-i18n="nav_contact">Liên Hệ</a>
+    <div class="lang-menu" style="display: flex; gap: 10px; margin-top: 20px; justify-content: center;">
+      <button class="lang-btn active" data-lang="vi" aria-label="Tiếng Việt" style="background:none; border:none; cursor:pointer;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/2/21/Flag_of_Vietnam.svg" alt="VI" style="width: 24px; border-radius: 3px;" />
+      </button>
+      <button class="lang-btn" data-lang="en" aria-label="English" style="background:none; border:none; cursor:pointer;">
+        <img src="https://upload.wikimedia.org/wikipedia/en/a/ae/Flag_of_the_United_Kingdom.svg" alt="EN" style="width: 24px; border-radius: 3px;" />
+      </button>
+    </div>
   </div>
 
   <main>
@@ -77,9 +93,9 @@
         <h1 class="hero-title">NONE <span>BIT </span>FC</h1>
         <p class="hero-subtitle">BIT FC – NOT OLD NEW ENERGY</p>
         <div class="hero-actions">
-          <a href="#about" class="btn btn-primary btn-slanted"><span class="btn-text">KHÁM PHÁ NGAY <span
+          <a href="#about" class="btn btn-primary btn-slanted"><span class="btn-text"><span data-i18n="hero_explore">KHÁM PHÁ NGAY</span> <span
                 class="arrow">&rarr;</span></span></a>
-          <a href="pages/team.html" class="btn btn-outline btn-slanted"><span class="btn-text">ĐỘI HÌNH</span></a>
+          <a href="pages/team.html" class="btn btn-outline btn-slanted"><span class="btn-text" data-i18n="hero_squad">ĐỘI HÌNH</span></a>
         </div>
       </div>
     </section>
@@ -92,8 +108,8 @@
 
         <!-- TABS -->
         <div class="mb-tab-wrap">
-          <button class="mb-tb mb-left" id="mb-t-match" onclick="mbSw('match')">4EVEREST CUP · 2026</button>
-          <button class="mb-tb mb-right" id="mb-t-std" onclick="mbSw('std')">VUA PHÁ LƯỚI</button>
+          <button class="mb-tb mb-left" id="mb-t-match" onclick="mbSw('match')" data-i18n="mb_match">4EVEREST CUP · 2026</button>
+          <button class="mb-tb mb-right" id="mb-t-std" onclick="mbSw('std')" data-i18n="mb_top_scorer">VUA PHÁ LƯỚI</button>
         </div>
 
         <!-- ── MATCH PANEL ── -->
@@ -124,26 +140,26 @@
 
               <!-- Countdown -->
               <div class="mb-cd-center">
-                <div class="mb-cd-label">Bắt đầu sau</div>
+                <div class="mb-cd-label" data-i18n="mb_starts_in">Bắt đầu sau</div>
                 <div class="mb-cd-row">
                   <div class="mb-cd-u">
                     <div class="mb-cd-n" id="mb-d">--</div>
-                    <div class="mb-cd-lbl">NGÀY</div>
+                    <div class="mb-cd-lbl" data-i18n="mb_days">NGÀY</div>
                   </div>
                   <div class="mb-cd-sep">:</div>
                   <div class="mb-cd-u">
                     <div class="mb-cd-n" id="mb-h">--</div>
-                    <div class="mb-cd-lbl">GIỜ</div>
+                    <div class="mb-cd-lbl" data-i18n="mb_hours">GIỜ</div>
                   </div>
                   <div class="mb-cd-sep">:</div>
                   <div class="mb-cd-u">
                     <div class="mb-cd-n" id="mb-m">--</div>
-                    <div class="mb-cd-lbl">PHÚT</div>
+                    <div class="mb-cd-lbl" data-i18n="mb_minutes">PHÚT</div>
                   </div>
                   <div class="mb-cd-sep">:</div>
                   <div class="mb-cd-u">
                     <div class="mb-cd-n" id="mb-s">--</div>
-                    <div class="mb-cd-lbl">GIÂY</div>
+                    <div class="mb-cd-lbl" data-i18n="mb_seconds">GIÂY</div>
                   </div>
                 </div>
                 <div class="mb-cd-date" id="rm-datetime">Chủ Nhật, 14/06/2026<br />15:30 · Sân ABC, Cầu Giấy</div>
@@ -228,27 +244,23 @@
             </div>
           </div>
           <div class="about-text fade-in">
-            <span class="section-label">Câu Chuyện Của Chúng Tôi</span>
+            <span class="section-label" data-i18n="about_label">Câu Chuyện Của Chúng Tôi</span>
             <div class="gold-divider"></div>
-            <h2 class="section-title">Hơn Cả Một<br />Câu Lạc Bộ</h2>
-            <p>Được thành lập bởi những anh em mang trong mình DNA công nghệ, None Bit FC đã vươn mình bứt phá khỏi
-              những dòng code khô khan để trở thành một thế lực đáng gờm trên các mặt sân phủi và là biểu tượng của tinh
-              thần chiến đấu không giới hạn.</p>
-            <p>Từ những trận cầu "giao lưu trà đá" thuở sơ khai đến những chiến dịch tăng tốc nảy lửa, mỗi trận đấu trên
-              mặt cỏ nhân tạo — "Nhà hát của những gã du mục IT" — là một lần hệ thống được đẩy lên mức tối đa, nơi anh
-              em kề vai sát cánh giải mã thế trận và những huyền thoại được sinh ra.</p>
+            <h2 class="section-title" data-i18n="about_title">Hơn Cả Một<br />Câu Lạc Bộ</h2>
+            <p data-i18n="about_p1">Được thành lập bởi những anh em mang trong mình DNA công nghệ, None Bit FC đã vươn mình bứt phá khỏi những dòng code khô khan để trở thành một thế lực đáng gờm trên các mặt sân phủi và là biểu tượng của tinh thần chiến đấu không giới hạn.</p>
+            <p data-i18n="about_p2">Từ những trận cầu "giao lưu trà đá" thuở sơ khai đến những chiến dịch tăng tốc nảy lửa, mỗi trận đấu trên mặt cỏ nhân tạo — "Nhà hát của những gã du mục IT" — là một lần hệ thống được đẩy lên mức tối đa, nơi anh em kề vai sát cánh giải mã thế trận và những huyền thoại được sinh ra.</p>
             <div class="about-stats">
               <div class="stat-item">
                 <div class="stat-number">2025</div>
-                <div class="stat-label">Thành Lập</div>
+                <div class="stat-label" data-i18n="about_founded">Thành Lập</div>
               </div>
               <div class="stat-item">
                 <div class="stat-number">3+</div>
-                <div class="stat-label">Danh Hiệu</div>
+                <div class="stat-label" data-i18n="about_trophies">Danh Hiệu</div>
               </div>
               <div class="stat-item">
                 <div class="stat-number">10.4K</div>
-                <div class="stat-label">Fan Hâm Mộ</div>
+                <div class="stat-label" data-i18n="about_fans">Fan Hâm Mộ</div>
               </div>
             </div>
           </div>
@@ -406,41 +418,36 @@
               <div class="label">Email Hợp Tác</div>
               <div class="value"><a href="mailto:contact@nbitfc.vn">contact@nbitfc.vn</a></div>
             </div>
-            <div style="margin-top:1.5rem;">
-              <div class="label"
-                style="font-family:var(--font-condensed);font-size:0.7rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--gray-mid);margin-bottom:0.8rem;">
-                Follow Us</div>
-              <div class="footer-socials">
-                <a href="#" title="Facebook">f</a>
-                <a href="#" title="Instagram">in</a>
-                <a href="#" title="YouTube">▶</a>
-              </div>
-            </div>
           </div>
           <div class="fade-in">
-            <div class="contact-form-group">
-              <label>Tên của bạn</label>
-              <input type="text" placeholder="Nguyễn Văn A" />
-            </div>
-            <div class="contact-form-group">
-              <label>Số Điện Thoại / Zalo</label>
-              <input type="tel" placeholder="09xxxxxxxx" />
-            </div>
-            <div class="contact-form-group">
-              <label>Mục đích liên hệ</label>
-              <select>
-                <option>Xin gia nhập đội bóng</option>
-                <option>Mời đá giao hữu (Cáp kèo)</option>
-                <option>Tài trợ / Quảng cáo</option>
-                <option>Khác</option>
-              </select>
-            </div>
-            <div class="contact-form-group">
-              <label>Nội dung</label>
-              <textarea placeholder="Nội dung tin nhắn của bạn..."></textarea>
-            </div>
-            <button class="btn btn-primary" style="width:100%;justify-content:center;"
-              onclick="alert('Tin nhắn đã được gửi! Chúng tôi sẽ liên hệ sớm nhất.')">GỬI NGAY</button>
+            <form id="contact-form" onsubmit="return false;">
+              <div class="contact-form-group">
+                <label>Tên của bạn *</label>
+                <input type="text" id="contact-name" placeholder="Nguyễn Văn A" required />
+              </div>
+              <div class="contact-form-group">
+                <label>Email liên hệ *</label>
+                <input type="email" id="contact-email" placeholder="example@email.com" required />
+              </div>
+              <div class="contact-form-group">
+                <label>Số Điện Thoại / Zalo *</label>
+                <input type="tel" id="contact-phone" placeholder="09xxxxxxxx" required />
+              </div>
+              <div class="contact-form-group">
+                <label>Mục đích liên hệ</label>
+                <select id="contact-subject">
+                  <option value="Xin gia nhập đội bóng">Xin gia nhập đội bóng</option>
+                  <option value="Mời đá giao hữu (Cáp kèo)">Mời đá giao hữu (Cáp kèo)</option>
+                  <option value="Tài trợ / Quảng cáo">Tài trợ / Quảng cáo</option>
+                  <option value="Khác">Khác</option>
+                </select>
+              </div>
+              <div class="contact-form-group">
+                <label>Nội dung *</label>
+                <textarea id="contact-message" placeholder="Nội dung tin nhắn của bạn..." required></textarea>
+              </div>
+              <button type="submit" id="contact-submit" class="btn btn-primary" style="width:100%;justify-content:center;">GỬI NGAY</button>
+            </form>
           </div>
         </div>
       </div>
@@ -479,12 +486,16 @@
     </div>
   </footer>
 
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script src="js/language.js?v=6"></script>
   <script src="js/main.js"></script>
+  <script src="js/contact.js?v=1"></script>
   <script type="module" src="js/Slider.js"></script>
   <script type="module" src="js/match_board.js"></script>
   <script type="module" src="js/home-news.js"></script>
   <script type="module" src="js/home-photos.js"></script>
   <script src="js/video-bg.js"></script>
+  <script src="js/audio-player.js?v=4"></script>
 </body>
 
 </html>

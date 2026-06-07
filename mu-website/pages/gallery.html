@@ -23,24 +23,33 @@
       <span>NONE BIT FC</span>
     </a>
     <ul class="nav-links">
-      <li><a href="../index.html">Trang chủ</a></li>
-      <li><a href="team.html">Đội Hình</a></li>
-      <li><a href="gallery.html" class="active">Thư Viện</a></li>
-      <li><a href="history.html">Thành Tích</a></li>
-      <li><a href="news.html">Tin Tức</a></li>
-      <li><a href="Management/dashboard.html">Quản Lý</a></li>
-      <li><a href="../index.html#contact">Liên Hệ</a></li>
+      <li><a href="../index.html" data-i18n="nav_home">Trang chủ</a></li>
+      <li><a href="team.html" data-i18n="nav_team">Đội Hình</a></li>
+      <li><a href="gallery.html" class="active" data-i18n="nav_gallery">Thư Viện</a></li>
+      <li><a href="history.html" data-i18n="nav_history">Thành Tích</a></li>
+      <li><a href="news.html" data-i18n="nav_news">Tin Tức</a></li>
+      <li><a href="Management/dashboard.html" data-i18n="nav_management">Quản Lý</a></li>
+      <li><a href="../index.html#contact" data-i18n="nav_contact">Liên Hệ</a></li>
+    
+      <li class="lang-menu">
+        <button class="lang-btn" data-lang="vi" aria-label="Tiếng Việt">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/2/21/Flag_of_Vietnam.svg" alt="VI" />
+        </button>
+        <button class="lang-btn" data-lang="en" aria-label="English">
+          <img src="https://upload.wikimedia.org/wikipedia/en/a/ae/Flag_of_the_United_Kingdom.svg" alt="EN" />
+        </button>
+      </li>
     </ul>
     <div class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></div>
   </nav>
   <div class="mobile-nav">
-    <a href="../index.html">Trang chủ</a>
-    <a href="team.html">Đội Hình</a>
-    <a href="gallery.html">Thư Viện</a>
-    <a href="history.html">Thành Tích</a>
-    <a href="news.html">Tin Tức</a>
-        <a href="Management/dashboard.html">Quản Lý</a>
-    <a href="../index.html#contact">Liên Hệ</a>
+    <a href="../index.html" data-i18n="nav_home">Trang chủ</a>
+    <a href="team.html" data-i18n="nav_team">Đội Hình</a>
+    <a href="gallery.html" data-i18n="nav_gallery">Thư Viện</a>
+    <a href="history.html" data-i18n="nav_history">Thành Tích</a>
+    <a href="news.html" data-i18n="nav_news">Tin Tức</a>
+        <a href="Management/dashboard.html" data-i18n="nav_management">Quản Lý</a>
+    <a href="../index.html#contact" data-i18n="nav_contact">Liên Hệ</a>
   </div>
 
   <!-- LIGHTBOX -->
@@ -56,22 +65,22 @@
 
   <main>
     <div class="page-hero">
-      <div class="eyebrow"> NONE BIT FC Gallery</div>
-      <h1>Khoảnh Khắc Bất Diệt</h1>
-      <p>Những hình ảnh và video ghi lại hành trình vinh quang của None BIT FC</p>
+      <div class="eyebrow" data-i18n="gallery_hero_eyebrow"> NONE BIT FC Gallery</div>
+      <h1 data-i18n="gallery_hero_title">Khoảnh Khắc Bất Diệt</h1>
+      <p data-i18n="gallery_hero_desc">Những hình ảnh và video ghi lại hành trình vinh quang của None BIT FC</p>
     </div>
 
     <div class="container">
       <div class="gallery-filters fade-in">
-        <button class="filter-btn gallery-filter-btn active" data-filter="all">Tất Cả</button>
-        <button class="filter-btn gallery-filter-btn" data-filter="photo">Hình Ảnh</button>
-        <button class="filter-btn gallery-filter-btn" data-filter="video">Video Clips</button>
+        <button class="filter-btn gallery-filter-btn active" data-filter="all" data-i18n="gallery_filter_all">Tất Cả</button>
+        <button class="filter-btn gallery-filter-btn" data-filter="photo" data-i18n="gallery_filter_photo">Hình Ảnh</button>
+        <button class="filter-btn gallery-filter-btn" data-filter="video" data-i18n="gallery_filter_video">Video Clips</button>
       </div>
 
       <div class="gallery-masonry" id="gallery-masonry-container">
         <!-- Render from JS -->
         <div style="grid-column: 1/-1; text-align: center; padding: 50px 0; color: var(--gray-mid);">
-          <div class="spinner"></div> Đang tải dữ liệu...
+          <div class="spinner"></div> <span data-i18n="loading_data">Đang tải dữ liệu...</span>
         </div>
       </div>
     </div>
@@ -83,16 +92,16 @@
           <img src="../assessts/logoBit.png" alt="NONE BIT FC" />
           <div class="footer-logo-text">NONE BIT FC<span>Not Old New Energy</span></div>
         </div>
-        <p class="footer-desc">Câu lạc bộ bóng đá sinh viên nhiệt huyết và đam mê, đại diện cho tinh thần "Không bao giờ cũ, luôn luôn mới" của tuổi trẻ.</p>
+        <p class="footer-desc" data-i18n="footer_desc">Câu lạc bộ bóng đá sinh viên nhiệt huyết và đam mê, đại diện cho tinh thần "Không bao giờ cũ, luôn luôn mới" của tuổi trẻ.</p>
       </div>
       <div class="footer-col">
-        <h4 class="footer-title">Thông Tin Liên Hệ</h4>
-        <p><strong>Địa chỉ:</strong> Học viện Ngân hàng, 12 Chùa Bộc, Đống Đa, Hà Nội</p>
+        <h4 class="footer-title" data-i18n="footer_info_title">Thông Tin Liên Hệ</h4>
+        <p><strong data-i18n="footer_address_label">Địa chỉ:</strong> <span data-i18n="footer_address_val">Học viện Ngân hàng, 12 Chùa Bộc, Đống Đa, Hà Nội</span></p>
         <p><strong>Email:</strong> clb.bit.bav@gmail.com</p>
         <p><strong>Hotline:</strong> 0123 456 789 (Mr. Đạt)</p>
       </div>
       <div class="footer-col">
-        <h4 class="footer-title">Kết Nối Với Chúng Tôi</h4>
+        <h4 class="footer-title" data-i18n="footer_connect_title">Kết Nối Với Chúng Tôi</h4>
         <div class="footer-socials">
           <a href="https://www.facebook.com/BIT.BAV" title="Facebook">Fb</a>
           <a href="https://www.instagram.com/nonebit.football/" title="Instagram">Ig</a>
@@ -101,12 +110,14 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2026 Câu Lạc Bộ Bóng Đá NONE BIT. Tất cả các quyền được bảo lưu.</p>
+      <p data-i18n="footer_rights">© 2026 Câu Lạc Bộ Bóng Đá NONE BIT. Tất cả các quyền được bảo lưu.</p>
     </div>
   </footer>
 
   <script src="../js/main.js"></script>
   <script src="../js/pages.js"></script>
   <script type="module" src="../js/gallery-public.js"></script>
+  <script src="../js/language.js"></script>
+  <script src="../js/audio-player.js"></script>
 </body>
 </html>

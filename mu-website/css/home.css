@@ -42,6 +42,7 @@
 }
 
 .hero-content {
+  margin-top: 10rem;
   position: relative;
   z-index: 2;
   text-align: center;
